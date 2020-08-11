@@ -1,2 +1,2 @@
 # The-Hangman-Game
-edit_1
+adding medium and hard levels
