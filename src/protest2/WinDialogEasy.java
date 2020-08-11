@@ -1,9 +1,11 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package protest2;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -12,7 +14,6 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
-import javax.swing.Timer;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -20,7 +21,7 @@ import sun.audio.AudioStream;
  *
  * @author Uttam
  */
-public class LoseDialog extends javax.swing.JDialog {
+public class WinDialogEasy extends javax.swing.JDialog {
 
     /**
      * A return status code - returned if Cancel button has been pressed
@@ -32,15 +33,11 @@ public class LoseDialog extends javax.swing.JDialog {
     public static final int RET_OK = 1;
 
     /**
-     * Creates new form LoseDialog
+     * Creates new form WinDialog
      */
-    
-    public LoseDialog(java.awt.Frame parent, boolean modal) {
-        
+    public WinDialogEasy(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
 
         // Close the dialog when Esc is pressed
         String cancelName = "cancel";
@@ -54,23 +51,13 @@ public class LoseDialog extends javax.swing.JDialog {
         });
     }
     
-    
-    ExtremeGame temp;
-    public LoseDialog(java.awt.Frame parent,ExtremeGame ref, boolean modal,String reason) {
-        
+    EasyGame temp;
+    public WinDialogEasy(java.awt.Frame parent,EasyGame ref, boolean modal) {
         super(parent, modal);
         initComponents();
         temp=ref;
-//        tButt.setVisible(false);
-//        tButt.doClick();
-        if("ZeroGuesses".equals(reason))
-            reason="                                No Guesses Left!!";
-        else
-            reason="                                Oops!! Time's Up!";
-        
-        temp.revealWord(reason);
-        ReasonText.setText(reason);
-        
+
+        // Close the dialog when Esc is pressed
         String cancelName = "cancel";
         InputMap inputMap = getRootPane().getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
@@ -127,15 +114,14 @@ public class LoseDialog extends javax.swing.JDialog {
 
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        ReasonText = new javax.swing.JTextField();
-        pandaCry = new javax.swing.JLabel();
+        pandaHappy = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
-        setBounds(new java.awt.Rectangle(350, 250, 600, 450));
+        setBounds(new java.awt.Rectangle(350, 250, 650, 400));
         setLocation(new java.awt.Point(350, 200));
-        setMaximumSize(new java.awt.Dimension(640, 440));
-        setMinimumSize(new java.awt.Dimension(640, 430));
-        setPreferredSize(new java.awt.Dimension(650, 400));
+        setMaximumSize(new java.awt.Dimension(650, 400));
+        setMinimumSize(new java.awt.Dimension(650, 400));
+        setPreferredSize(new java.awt.Dimension(652, 402));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -154,7 +140,7 @@ public class LoseDialog extends javax.swing.JDialog {
             }
         });
         getContentPane().add(okButton);
-        okButton.setBounds(20, 300, 160, 70);
+        okButton.setBounds(40, 310, 160, 60);
         getRootPane().setDefaultButton(okButton);
 
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseQuit.png"))); // NOI18N
@@ -166,31 +152,15 @@ public class LoseDialog extends javax.swing.JDialog {
             }
         });
         getContentPane().add(cancelButton);
-        cancelButton.setBounds(470, 300, 160, 70);
+        cancelButton.setBounds(450, 310, 160, 60);
 
-        ReasonText.setEditable(false);
-        ReasonText.setBackground(new java.awt.Color(140, 0, 0));
-        ReasonText.setFont(new java.awt.Font("Trebuchet MS", 3, 24)); // NOI18N
-        ReasonText.setForeground(new java.awt.Color(255, 255, 255));
-        ReasonText.setText("                                       Reason");
-        ReasonText.setBorder(null);
-        ReasonText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReasonTextActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ReasonText);
-        ReasonText.setBounds(0, 160, 650, 60);
+        pandaHappy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dance.gif"))); // NOI18N
+        getContentPane().add(pandaHappy);
+        pandaHappy.setBounds(130, 130, 320, 290);
 
-        pandaCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sad (2).gif"))); // NOI18N
-        getContentPane().add(pandaCry);
-        pandaCry.setBounds(160, 80, 330, 400);
-
-        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseDialog.png"))); // NOI18N
-        BackImage.setMaximumSize(new java.awt.Dimension(700, 450));
-        BackImage.setMinimumSize(new java.awt.Dimension(700, 450));
+        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WinDialog.png"))); // NOI18N
         getContentPane().add(BackImage);
-        BackImage.setBounds(0, 0, 652, 401);
+        BackImage.setBounds(0, 0, 652, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -207,7 +177,6 @@ public class LoseDialog extends javax.swing.JDialog {
         temp.backButton();
         temp.dispose();
         this.dispose();
-        
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
@@ -220,16 +189,6 @@ public class LoseDialog extends javax.swing.JDialog {
         temp.dispose();
         this.dispose();
     }//GEN-LAST:event_closeDialog
-
-    Timer timer;
-    int xSoul=180;
-    int ySoul=230;
-    int wSoul=280;
-    int hSoul=160;
-    
-    private void ReasonTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReasonTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ReasonTextActionPerformed
     
     private void doClose(int retStatus) {
         returnStatus = retStatus;
@@ -254,20 +213,20 @@ public class LoseDialog extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoseDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoseDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoseDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoseDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(WinDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoseDialog dialog = new LoseDialog(new javax.swing.JFrame(), true);
+                WinDialogEasy dialog = new WinDialogEasy(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -281,10 +240,9 @@ public class LoseDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackImage;
-    private javax.swing.JTextField ReasonText;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton okButton;
-    private javax.swing.JLabel pandaCry;
+    private javax.swing.JLabel pandaHappy;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;
