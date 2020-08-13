@@ -1,4 +1,3 @@
-
 package protest2;
 
 import java.awt.Color;
@@ -7,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import static protest2.Home.audioStream;
@@ -20,7 +20,22 @@ import sun.audio.AudioStream;
  */
 public class MediumGame extends javax.swing.JFrame {
 
-    void setWords(){
+    public static int score=0;
+    public static int heartLives;
+    
+    String str[];
+    String word,temp;
+    char ch[];
+    ArrayList<Integer> al=new ArrayList<>();
+    char butt;
+    String show;
+    String hint;
+    int chances;
+    MediumGame ref=this;
+    
+    Home homeRef;
+    
+    public void setWords(){
         String tempStr[]={
 "abruptly" ,
 "absurd" ,
@@ -192,21 +207,6 @@ public class MediumGame extends javax.swing.JFrame {
     };
        str=tempStr; 
  }
-
-    String str[];
-    String word,temp;
-    char ch[];
-    ArrayList<Integer> al=new ArrayList<>();
-    char butt;
-    String show;
-    String hint;
-    int chances;
-    String LoseReason;
-    MediumGame ref=this;
-    
-    Home homeRef;
-    
-    
     
     public MediumGame() {
         initComponents();
@@ -218,12 +218,14 @@ public class MediumGame extends javax.swing.JFrame {
     public MediumGame(Home home) {
         homeRef=home;
         initComponents();
+        heartLives=3;
         setWords();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         newGame();
     }
     
     static AudioStream audioStream;
+    
     static void playWinLoseSound(){
         try{
             String gongFile = "src/sounds/button-3.wav";
@@ -236,52 +238,57 @@ public class MediumGame extends javax.swing.JFrame {
         }
     }
     
-    
     public void newGame(){
-        
         timerReset();
-        BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Normal.jpg"));
-        pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
-        xPanda=1000;
-        yPanda=-350;
-        pandaAlive.setBounds(xPanda, yPanda, 230, 730);
-        
-        pandaAlive.setVisible(true);
-        pandaDead.setVisible(false);
-        
-        timerResetButton.doClick();
-        clockText.setForeground(Color.WHITE);
-        ProgressBar.setValue(100);
-        ProgressBar.setForeground(Color.green);
-        wordspace.setForeground(Color.black);
-        chances=6;
-        chancesValue.setText(String.valueOf(chances));
-        lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
-        fire.setVisible(true);
-        fire1.setVisible(true);
-        //music.doClick();
-        
-        
-        word= str[(int) (Math.random() * (str.length-1))];
-        word=word.toUpperCase();
-        int len=word.length();
-        
-        temp="";
-        hint="";
-        
-        for(int i=0;i<len;i++)
-            temp=temp+"-";
-        
-        ch=temp.toCharArray();
-        
-        wordspace.setText(temp);
-        
-        show=temp;
-        
-        
+        setInitialElements();
     }
     
-    void changeValue(){
+    public void setInitialElements(){
+            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Normal.jpg"));
+            pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
+            xPanda=1000;
+            yPanda=-350;
+            pandaAlive.setBounds(xPanda, yPanda, 230, 730);
+
+            pandaAlive.setVisible(true);
+            pandaDead.setVisible(false);
+
+            timerResetButton.doClick();
+            clockText.setForeground(Color.WHITE);
+            ProgressBar.setValue(100);
+            ProgressBar.setForeground(Color.green);
+            wordspace.setForeground(Color.black);
+            chances=6;
+            chancesValue.setText(String.valueOf(chances));
+            lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
+            fire.setVisible(true);
+            fire1.setVisible(true);
+            //music.doClick();
+
+
+            word= str[(int) (Math.random() * (str.length-1))];
+            word=word.toUpperCase();
+            int len=word.length();
+            
+
+            temp="";
+            hint="";
+            
+            
+            //easyInitials
+            temp=temp+word.charAt(0);
+            for(int i=0;i<len;i++)
+                temp=temp+"-";
+            temp=temp+word.charAt(word.length()-1);
+            
+            ch=temp.toCharArray();
+            
+            wordspace.setText(temp);
+
+            show=temp;
+    }
+    
+    public void changeValue(){
         
         for(int i=0;i<word.length();i++){
             if(word.charAt(i)==butt){
@@ -354,11 +361,11 @@ public class MediumGame extends javax.swing.JFrame {
         BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
         
         
-        LoseReason="ZeroGuesses";
+        //LoseReason="ZeroGuesses";
         timerReset();
             
         revealWord("lose");
-        loseWindow();
+        loseWindow("noChance");
             
             
         }
@@ -371,13 +378,13 @@ public class MediumGame extends javax.swing.JFrame {
             fire1.setVisible(false);
             BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
             
-            new WinDialog(this,this,true).show();
+            new WinDialogMedium(this,this,true).show();
         }
         
         
     }
     
-    void revealWord(String result){
+    public void revealWord(String result){
         wordspace.setText(word);
         
         if("win".equals(result))
@@ -387,9 +394,7 @@ public class MediumGame extends javax.swing.JFrame {
         
     }
     
-    public void anotherGame(){
-        
-        
+    public void setAlphabets(){
         D.setBackground(new java.awt.Color(25, 0, 0));
         D.setVisible(true);
         
@@ -468,8 +473,65 @@ public class MediumGame extends javax.swing.JFrame {
         
         I.setBackground(new java.awt.Color(25, 0, 0));
         I.setVisible(true);
+    }
+    
+    public void anotherGame(){
         
+        setAlphabets();
         newGame();
+    }
+    
+    public void loseWindow(String reason){
+       heartLives--;
+       new LoseDialogMedium(this,this,true,reason,heartLives,score).show();
+    }    
+       
+    public void backButton(){
+        homeRef.show();
+        timerReset();
+        this.dispose();
+    }
+   
+    public void alphabetSound(){
+        
+        try{
+            String gongFile = "src/sounds/alphabet.wav";
+            InputStream in = new FileInputStream(gongFile);
+            AudioStream audioStream = new AudioStream(in);
+            AudioPlayer.player.start(audioStream);
+            
+        }catch(Exception e){
+            //System.out.println(e);
+            
+        }
+        
+    }
+    
+    public void menuSound(){
+        
+        try{
+            String gongFile = "src/sounds/menu.wav";
+            InputStream in = new FileInputStream(gongFile);
+            AudioStream audioStream = new AudioStream(in);
+            AudioPlayer.player.start(audioStream);
+            
+        }catch(Exception e){
+            //System.out.println(e);
+            
+        }
+        
+    }
+    
+    Timer timer2;
+    boolean timer2Flag=false;
+    public void timerReset(){
+        if(timeFlag){
+                timer.stop();
+                timeFlag=false;
+                time=900;
+                timeText=time/20;
+                clockText.setText(Integer.toString(timeText));
+        }
         
     }
 
@@ -1045,36 +1107,7 @@ public class MediumGame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     
-    public static void alphabetSound(){
-        
-        try{
-            String gongFile = "src/sounds/alphabet.wav";
-            InputStream in = new FileInputStream(gongFile);
-            AudioStream audioStream = new AudioStream(in);
-            AudioPlayer.player.start(audioStream);
-            
-        }catch(Exception e){
-            //System.out.println(e);
-            
-        }
-        
-    }
-    public static void menuSound(){
-        
-        try{
-            String gongFile = "src/sounds/menu.wav";
-            InputStream in = new FileInputStream(gongFile);
-            AudioStream audioStream = new AudioStream(in);
-            AudioPlayer.player.start(audioStream);
-            
-        }catch(Exception e){
-            //System.out.println(e);
-            
-        }
-        
-    }
     private void HActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HActionPerformed
         // TODO add your handling code here:
         
@@ -1156,8 +1189,6 @@ public class MediumGame extends javax.swing.JFrame {
         changeValue();
     }//GEN-LAST:event_BActionPerformed
 
-    
-    
     private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
         // TODO add your handling code here:
         
@@ -1356,9 +1387,12 @@ public class MediumGame extends javax.swing.JFrame {
     }//GEN-LAST:event_ZActionPerformed
 
     private void AnotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnotherActionPerformed
-        
-        anotherGame();
-        
+        heartLives--;
+        if(heartLives==1)
+            Another.setEnabled(false);
+        else{
+            anotherGame();
+        }
     }//GEN-LAST:event_AnotherActionPerformed
 
     int time=900;
@@ -1370,7 +1404,6 @@ public class MediumGame extends javax.swing.JFrame {
     int yPanda=-350;
     int ySoul=430;
     
-    //static int fff=0;
     private void timerResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerResetButtonActionPerformed
         
         time=459;
@@ -1432,18 +1465,18 @@ public class MediumGame extends javax.swing.JFrame {
             
         } else {
            clockText.setText(" 0"); 
-           LoseReason="Timeout";
+           //LoseReason="Timeout";
            
            
           ((Timer) (e.getSource())).stop();          
             timerReset();
-            LoseReason="Timeout";
+            //LoseReason="Timeout";
             ProgressBar.setValue(0);
             BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
             pandaAlive.setVisible(false);
             pandaDead.setVisible(true);
             revealWord("lose");
-            loseWindow();
+            loseWindow("noTime");
         }
       }
     });
@@ -1496,28 +1529,7 @@ public class MediumGame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_backButtonMouseClicked
 
-    Timer timer2;
-    boolean timer2Flag=false;
-    void loseWindow(){
-       new LoseDialog(this,this,true,LoseReason).show();
-    }    
-       
-    void backButton(){
-        homeRef.show();
-        timerReset();
-        this.dispose();
-    }
-    
-    void timerReset(){
-        if(timeFlag){
-                timer.stop();
-                timeFlag=false;
-                time=900;
-                timeText=time/20;
-                clockText.setText(Integer.toString(timeText));
-        }
-        
-    }
+   
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
