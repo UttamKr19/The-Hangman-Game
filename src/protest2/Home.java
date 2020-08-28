@@ -234,7 +234,7 @@ public class Home extends javax.swing.JFrame {
     private void PlayWorkingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayWorkingMouseClicked
         // TODO add your handling code here:
         menuSound();
-        new ExtremeGame(this).show();
+        new EasyGame(this).show();
         this.hide();
     }//GEN-LAST:event_PlayWorkingMouseClicked
 
