@@ -5,8 +5,10 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import static protest2.Home.audioStream;
@@ -20,183 +22,13 @@ import sun.audio.AudioStream;
  */
 public class HardGame extends javax.swing.JFrame {
 
-    void setWords(){
-        String tempStr[]={
-"abruptly" ,
-"absurd" ,
-"abyss" ,
-"affix" ,
-"avenue" ,
-"awkward" ,
-"axiom" ,
-
-"bagpipes" ,
-"bandwagon" ,
-"beekeeper" ,
-"bikini" ,
-"blitz" ,
-"blizzard" ,
-"boggle" ,
-"bookworm" ,
-"boxcar" ,
-"boxful" ,
-"buffalo" ,
-"buffoon" ,
-"buzzing" ,
-"buzzwords" ,
-
-"cockiness" ,
-"croquet" ,
-"crypt" ,
-"cycle" ,
-
-"dizzying" ,
-"duplex" ,
-"dwarves" ,
-
-"embezzle" ,
-"equip" ,
-"espionage" ,
-"exodus" ,
-"faking" ,
-"fishhook" ,
-"fixable" ,
-"flopping" ,
-"fluffiness" ,
-"frizzled" ,
-"fuchsia" ,"funny" ,
-
-"gabby" ,"galaxy" ,"galvanize" ,
-"glowworm" ,
-"gnarly" ,
-"gossip" ,
-"grogginess" ,
-
-"haphazard" ,
-"hyphen" ,
-
-"iatrogenic" ,
-"icebox" ,
-"injury" ,
-"ivory" ,
-"ivy" ,
-
-"jackpot" ,
-"jaundice" ,
-"jawbreaker" ,
-"jazziest" ,
-"jazzy" ,
-"jelly" ,
-"jigsaw" ,
-"jinx" ,
-"jiujitsu" ,
-"jockey" ,
-"jogging" ,
-"joking" ,
-"jovial" ,
-"joyful" ,
-"juicy" ,
-"jukebox" ,
-"jumbo" ,
-
-
-"keyhole" ,
-"khaki" ,
-"kilobyte" ,
-"knapsack" ,
-
-"larynx" ,
-"lengths" ,
-"lucky" ,
-"luxury" ,
-"lymph" ,
-
-"matrix" ,
-"megahertz" ,
-"microwave" ,
-"mnemonic" ,
-"mystify" ,
-
-"nightclub" ,
-"nowadays" ,
-"numbskull" ,
-"nymph" ,
-
-"ovary" ,
-"oxidize" ,
-"oxygen" ,
-
-"pajama" ,
-"peekaboo" ,
-"phlegm" ,
-"pixel" ,
-"pneumonia" ,
-"psyche" ,
-"puppy" ,
-"puzzling" ,
-
-"quartz" ,
-"queue" ,
-"quixotic" ,
-"quiz" ,
-"quizzes" ,
-
-"rhythm" ,
-"rickshaw" ,
-
-"squawk" ,
-"staff" ,
-"strength" ,
-"strengths" ,
-"stretch" ,
-"subway" ,
-"syndrome" ,
-
-"thriftless" ,
-"thumbscrew" ,
-"transcript" ,
-"transplant" ,
-
-"unknown" ,
-"unworthy" ,
-"unzip" ,
-"uptown" ,
-"vaporize" ,
-"vixen" ,
-"vodka" ,
-"voodoo" ,
-"vortex" ,
-
-"wave" ,
-"waxy" ,
-"wellspring" ,
-"wheezy" ,
-"whiskey" ,
-"whizzing" ,
-"whomever" ,
-"witchcraft" ,
-"wizard" ,
-"wristwatch" ,
-
-"xylophone" ,
-
-"yachtsman" ,
-"youthful" ,
-"yummy" ,
-
-"zigzag" ,
-"zigzagging" ,
-"zipper" ,
-"zodiac" ,
-"zombie"
-    };
-       str=tempStr; 
- }
-
+    public static int score=0;
+    public static int heartLives=3;
     String str[];
     String word,temp;
     char ch[];
     ArrayList<Integer> al=new ArrayList<>();
+    HashSet<Integer> hash=new HashSet<>();
     char butt;
     String show;
     String hint;
@@ -205,20 +37,218 @@ public class HardGame extends javax.swing.JFrame {
     HardGame ref=this;
     
     Home homeRef;
+    MediumGame mediumRef;
     
+    
+    
+    
+    public void setWordsFromFile(){
+        String t="";
+        String st[];
+        int ch;
+        try{
+           
+           FileReader fr=new FileReader("C:\\Users\\Uttam\\Documents\\Git\\TheHangmanGame_Git\\src\\words.txt");
+           while ((ch=fr.read())!=-1){
+               t=t+(""+(char)ch);
+           }
+           st=t.split("\r\n");
+           str=st;
+           
+        }catch(Exception e){
+            System.out.println("dfsf");
+            setWords();
+        }
+    }
+    void setWords(){
+        String tempStr[]={
+"abruptly" ,
+"absurd" ,
+//"abyss" ,
+//"affix" ,
+//"avenue" ,
+//"awkward" ,
+//"axiom" ,
+//
+//"bagpipes" ,
+//"bandwagon" ,
+//"beekeeper" ,
+//"bikini" ,
+//"blitz" ,
+//"blizzard" ,
+//"boggle" ,
+//"bookworm" ,
+//"boxcar" ,
+//"boxful" ,
+//"buffalo" ,
+//"buffoon" ,
+//"buzzing" ,
+//"buzzwords" ,
+//
+//"cockiness" ,
+//"croquet" ,
+//"crypt" ,
+//"cycle" ,
+//
+//"dizzying" ,
+//"duplex" ,
+//"dwarves" ,
+//
+//"embezzle" ,
+//"equip" ,
+//"espionage" ,
+//"exodus" ,
+//"faking" ,
+//"fishhook" ,
+//"fixable" ,
+//"flopping" ,
+//"fluffiness" ,
+//"frizzled" ,
+//"fuchsia" ,"funny" ,
+//
+//"gabby" ,"galaxy" ,"galvanize" ,
+//"glowworm" ,
+//"gnarly" ,
+//"gossip" ,
+//"grogginess" ,
+//
+//"haphazard" ,
+//"hyphen" ,
+//
+//"iatrogenic" ,
+//"icebox" ,
+//"injury" ,
+//"ivory" ,
+//"ivy" ,
+//
+//"jackpot" ,
+//"jaundice" ,
+//"jawbreaker" ,
+//"jazziest" ,
+//"jazzy" ,
+//"jelly" ,
+//"jigsaw" ,
+//"jinx" ,
+//"jiujitsu" ,
+//"jockey" ,
+//"jogging" ,
+//"joking" ,
+//"jovial" ,
+//"joyful" ,
+//"juicy" ,
+//"jukebox" ,
+//"jumbo" ,
+//
+//
+//"keyhole" ,
+//"khaki" ,
+//"kilobyte" ,
+//"knapsack" ,
+//
+//"larynx" ,
+//"lengths" ,
+//"lucky" ,
+//"luxury" ,
+//"lymph" ,
+//
+//"matrix" ,
+//"megahertz" ,
+//"microwave" ,
+//"mnemonic" ,
+//"mystify" ,
+//
+//"nightclub" ,
+//"nowadays" ,
+//"numbskull" ,
+//"nymph" ,
+//
+//"ovary" ,
+//"oxidize" ,
+//"oxygen" ,
+//
+//"pajama" ,
+//"peekaboo" ,
+//"phlegm" ,
+//"pixel" ,
+//"pneumonia" ,
+//"psyche" ,
+//"puppy" ,
+//"puzzling" ,
+//
+//"quartz" ,
+//"queue" ,
+//"quixotic" ,
+//"quiz" ,
+//"quizzes" ,
+//
+//"rhythm" ,
+//"rickshaw" ,
+//
+//"squawk" ,
+//"staff" ,
+//"strength" ,
+//"strengths" ,
+//"stretch" ,
+//"subway" ,
+//"syndrome" ,
+//
+//"thriftless" ,
+//"thumbscrew" ,
+//"transcript" ,
+//"transplant" ,
+//
+//"unknown" ,
+//"unworthy" ,
+//"unzip" ,
+//"uptown" ,
+//"vaporize" ,
+//"vixen" ,
+//"vodka" ,
+//"voodoo" ,
+//"vortex" ,
+//
+//"wave" ,
+//"waxy" ,
+//"wellspring" ,
+//"wheezy" ,
+//"whiskey" ,
+//"whizzing" ,
+//"whomever" ,
+//"witchcraft" ,
+//"wizard" ,
+//"wristwatch" ,
+//
+//"xylophone" ,
+//
+//"yachtsman" ,
+//"youthful" ,
+//"yummy" ,
+//
+//"zigzag" ,
+//"zigzagging" ,
+//"zipper" ,
+//"zodiac" ,
+//"zombie"
+    };
+       str=tempStr; 
+ }
+
     
     
     public HardGame() {
         initComponents();
-        setWords();
+        setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         newGame();
     }
     
-    public HardGame(Home home) {
+    public HardGame(Home home,MediumGame med,int heart,int sco) {
         homeRef=home;
+        mediumRef=med;
+        heartLives=1;
+        this.score=score;
         initComponents();
-        setWords();
+        setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         newGame();
     }
@@ -260,11 +290,19 @@ public class HardGame extends javax.swing.JFrame {
         fire.setVisible(true);
         fire1.setVisible(true);
         //music.doClick();
+        if(heartLives<=1)
+            Another.setEnabled(false);
         
-        
-        word= str[(int) (Math.random() * (str.length-1))];
-        word=word.toUpperCase();
-        int len=word.length();
+        int r=(int)(Math.random() * (str.length-1));
+            if(hash.contains(r))
+                r=(int)(Math.random() * (str.length-1));
+            if(hash.contains(r))
+                r=(int)(Math.random() * (str.length-1));
+            
+            hash.add(r);
+            word= str[r];
+            word=word.toUpperCase();
+            int len=word.length();
         
         temp="";
         hint="";
@@ -371,7 +409,7 @@ public class HardGame extends javax.swing.JFrame {
             fire1.setVisible(false);
             BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
             
-            new WinDialog(this,this,true).show();
+            new WinDialogHard(this,this,true).show();
         }
         
         
@@ -1356,9 +1394,11 @@ public class HardGame extends javax.swing.JFrame {
     }//GEN-LAST:event_ZActionPerformed
 
     private void AnotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnotherActionPerformed
+       heartLives--;
+        if(heartLives<=1)
+            Another.setEnabled(false);
         
         anotherGame();
-        
     }//GEN-LAST:event_AnotherActionPerformed
 
     int time=900;
@@ -1499,8 +1539,8 @@ public class HardGame extends javax.swing.JFrame {
     Timer timer2;
     boolean timer2Flag=false;
     void loseWindow(){
-       new LoseDialog(this,this,true,LoseReason).show();
-    }    
+       new LoseDialogHard(this,this,true,LoseReason,heartLives,score).show();
+    }
        
     void backButton(){
         homeRef.show();
