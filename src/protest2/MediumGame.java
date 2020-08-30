@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import static protest2.Home.audioStream;
@@ -21,12 +23,13 @@ import sun.audio.AudioStream;
 public class MediumGame extends javax.swing.JFrame {
 
     public static int score=0;
-    public static int heartLives;
+    public static int heartLives=3;
     
     String str[];
     String word,temp;
     char ch[];
     ArrayList<Integer> al=new ArrayList<>();
+    HashSet<Integer> hash=new HashSet<>();
     char butt;
     String show;
     String hint;
@@ -34,175 +37,195 @@ public class MediumGame extends javax.swing.JFrame {
     MediumGame ref=this;
     
     Home homeRef;
+    EasyGame easyRef;
     
+      
+    public void setWordsFromFile(){
+        String t="";
+        String st[];
+        int ch;
+        try{
+           
+           FileReader fr=new FileReader("C:\\Users\\Uttam\\Documents\\Git\\TheHangmanGame_Git\\src\\words.txt");
+           while ((ch=fr.read())!=-1){
+               t=t+(""+(char)ch);
+           }
+           st=t.split("\r\n");
+           str=st;
+           
+        }catch(Exception e){
+            System.out.println("dfsf");
+            setWords();
+        }
+    }
     public void setWords(){
         String tempStr[]={
 "abruptly" ,
 "absurd" ,
 "abyss" ,
-"affix" ,
-"avenue" ,
-"awkward" ,
-"axiom" ,
-
-"bagpipes" ,
-"bandwagon" ,
-"beekeeper" ,
-"bikini" ,
-"blitz" ,
-"blizzard" ,
-"boggle" ,
-"bookworm" ,
-"boxcar" ,
-"boxful" ,
-"buffalo" ,
-"buffoon" ,
-"buzzing" ,
-"buzzwords" ,
-
-"cockiness" ,
-"croquet" ,
-"crypt" ,
-"cycle" ,
-
-"dizzying" ,
-"duplex" ,
-"dwarves" ,
-
-"embezzle" ,
-"equip" ,
-"espionage" ,
-"exodus" ,
-"faking" ,
-"fishhook" ,
-"fixable" ,
-"flopping" ,
-"fluffiness" ,
-"frizzled" ,
-"fuchsia" ,"funny" ,
-
-"gabby" ,"galaxy" ,"galvanize" ,
-"glowworm" ,
-"gnarly" ,
-"gossip" ,
-"grogginess" ,
-
-"haphazard" ,
-"hyphen" ,
-
-"iatrogenic" ,
-"icebox" ,
-"injury" ,
-"ivory" ,
-"ivy" ,
-
-"jackpot" ,
-"jaundice" ,
-"jawbreaker" ,
-"jazziest" ,
-"jazzy" ,
-"jelly" ,
-"jigsaw" ,
-"jinx" ,
-"jiujitsu" ,
-"jockey" ,
-"jogging" ,
-"joking" ,
-"jovial" ,
-"joyful" ,
-"juicy" ,
-"jukebox" ,
-"jumbo" ,
-
-
-"keyhole" ,
-"khaki" ,
-"kilobyte" ,
-"knapsack" ,
-
-"larynx" ,
-"lengths" ,
-"lucky" ,
-"luxury" ,
-"lymph" ,
-
-"matrix" ,
-"megahertz" ,
-"microwave" ,
-"mnemonic" ,
-"mystify" ,
-
-"nightclub" ,
-"nowadays" ,
-"numbskull" ,
-"nymph" ,
-
-"ovary" ,
-"oxidize" ,
-"oxygen" ,
-
-"pajama" ,
-"peekaboo" ,
-"phlegm" ,
-"pixel" ,
-"pneumonia" ,
-"psyche" ,
-"puppy" ,
-"puzzling" ,
-
-"quartz" ,
-"queue" ,
-"quixotic" ,
-"quiz" ,
-"quizzes" ,
-
-"rhythm" ,
-"rickshaw" ,
-
-"squawk" ,
-"staff" ,
-"strength" ,
-"strengths" ,
-"stretch" ,
-"subway" ,
-"syndrome" ,
-
-"thriftless" ,
-"thumbscrew" ,
-"transcript" ,
-"transplant" ,
-
-"unknown" ,
-"unworthy" ,
-"unzip" ,
-"uptown" ,
-"vaporize" ,
-"vixen" ,
-"vodka" ,
-"voodoo" ,
-"vortex" ,
-
-"wave" ,
-"waxy" ,
-"wellspring" ,
-"wheezy" ,
-"whiskey" ,
-"whizzing" ,
-"whomever" ,
-"witchcraft" ,
-"wizard" ,
-"wristwatch" ,
-
-"xylophone" ,
-
-"yachtsman" ,
-"youthful" ,
-"yummy" ,
-
-"zigzag" ,
-"zigzagging" ,
-"zipper" ,
-"zodiac" ,
+//"affix" ,
+//"avenue" ,
+//"awkward" ,
+//"axiom" ,
+//
+//"bagpipes" ,
+//"bandwagon" ,
+//"beekeeper" ,
+//"bikini" ,
+//"blitz" ,
+//"blizzard" ,
+//"boggle" ,
+//"bookworm" ,
+//"boxcar" ,
+//"boxful" ,
+//"buffalo" ,
+//"buffoon" ,
+//"buzzing" ,
+//"buzzwords" ,
+//
+//"cockiness" ,
+//"croquet" ,
+//"crypt" ,
+//"cycle" ,
+//
+//"dizzying" ,
+//"duplex" ,
+//"dwarves" ,
+//
+//"embezzle" ,
+//"equip" ,
+//"espionage" ,
+//"exodus" ,
+//"faking" ,
+//"fishhook" ,
+//"fixable" ,
+//"flopping" ,
+//"fluffiness" ,
+//"frizzled" ,
+//"fuchsia" ,"funny" ,
+//
+//"gabby" ,"galaxy" ,"galvanize" ,
+//"glowworm" ,
+//"gnarly" ,
+//"gossip" ,
+//"grogginess" ,
+//
+//"haphazard" ,
+//"hyphen" ,
+//
+//"iatrogenic" ,
+//"icebox" ,
+//"injury" ,
+//"ivory" ,
+//"ivy" ,
+//
+//"jackpot" ,
+//"jaundice" ,
+//"jawbreaker" ,
+//"jazziest" ,
+//"jazzy" ,
+//"jelly" ,
+//"jigsaw" ,
+//"jinx" ,
+//"jiujitsu" ,
+//"jockey" ,
+//"jogging" ,
+//"joking" ,
+//"jovial" ,
+//"joyful" ,
+//"juicy" ,
+//"jukebox" ,
+//"jumbo" ,
+//
+//
+//"keyhole" ,
+//"khaki" ,
+//"kilobyte" ,
+//"knapsack" ,
+//
+//"larynx" ,
+//"lengths" ,
+//"lucky" ,
+//"luxury" ,
+//"lymph" ,
+//
+//"matrix" ,
+//"megahertz" ,
+//"microwave" ,
+//"mnemonic" ,
+//"mystify" ,
+//
+//"nightclub" ,
+//"nowadays" ,
+//"numbskull" ,
+//"nymph" ,
+//
+//"ovary" ,
+//"oxidize" ,
+//"oxygen" ,
+//
+//"pajama" ,
+//"peekaboo" ,
+//"phlegm" ,
+//"pixel" ,
+//"pneumonia" ,
+//"psyche" ,
+//"puppy" ,
+//"puzzling" ,
+//
+//"quartz" ,
+//"queue" ,
+//"quixotic" ,
+//"quiz" ,
+//"quizzes" ,
+//
+//"rhythm" ,
+//"rickshaw" ,
+//
+//"squawk" ,
+//"staff" ,
+//"strength" ,
+//"strengths" ,
+//"stretch" ,
+//"subway" ,
+//"syndrome" ,
+//
+//"thriftless" ,
+//"thumbscrew" ,
+//"transcript" ,
+//"transplant" ,
+//
+//"unknown" ,
+//"unworthy" ,
+//"unzip" ,
+//"uptown" ,
+//"vaporize" ,
+//"vixen" ,
+//"vodka" ,
+//"voodoo" ,
+//"vortex" ,
+//
+//"wave" ,
+//"waxy" ,
+//"wellspring" ,
+//"wheezy" ,
+//"whiskey" ,
+//"whizzing" ,
+//"whomever" ,
+//"witchcraft" ,
+//"wizard" ,
+//"wristwatch" ,
+//
+//"xylophone" ,
+//
+//"yachtsman" ,
+//"youthful" ,
+//"yummy" ,
+//
+//"zigzag" ,
+//"zigzagging" ,
+//"zipper" ,
+//"zodiac" ,
 "zombie"
     };
        str=tempStr; 
@@ -210,16 +233,19 @@ public class MediumGame extends javax.swing.JFrame {
     
     public MediumGame() {
         initComponents();
-        setWords();
+        setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         newGame();
     }
     
-    public MediumGame(Home home) {
+    public MediumGame(Home home,EasyGame easy,int heart,int sco) {
+        
         homeRef=home;
+        easyRef=easy;
+        heartLives=2;
+        this.score=score;
         initComponents();
-        heartLives=3;
-        setWords();
+        setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         newGame();
     }
@@ -264,9 +290,19 @@ public class MediumGame extends javax.swing.JFrame {
             fire.setVisible(true);
             fire1.setVisible(true);
             //music.doClick();
+            
+            if(heartLives<=1)
+            Another.setEnabled(false);
 
 
-            word= str[(int) (Math.random() * (str.length-1))];
+            int r=(int)(Math.random() * (str.length-1));
+            if(hash.contains(r))
+                r=(int)(Math.random() * (str.length-1));
+            if(hash.contains(r))
+                r=(int)(Math.random() * (str.length-1));
+            
+            hash.add(r);
+            word= str[r];
             word=word.toUpperCase();
             int len=word.length();
             
@@ -275,11 +311,11 @@ public class MediumGame extends javax.swing.JFrame {
             hint="";
             
             
-            //easyInitials
+            //mediumInitials
             temp=temp+word.charAt(0);
-            for(int i=0;i<len;i++)
+            for(int i=0;i<len-1;i++)
                 temp=temp+"-";
-            temp=temp+word.charAt(word.length()-1);
+            //temp=temp+word.charAt(word.length()-1);
             
             ch=temp.toCharArray();
             
@@ -378,7 +414,8 @@ public class MediumGame extends javax.swing.JFrame {
             fire1.setVisible(false);
             BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
             
-            new WinDialogMedium(this,this,true).show();
+            new HardGame(homeRef,this,heartLives,score).show();
+            this.dispose();
         }
         
         
@@ -1388,11 +1425,10 @@ public class MediumGame extends javax.swing.JFrame {
 
     private void AnotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnotherActionPerformed
         heartLives--;
-        if(heartLives==1)
+        if(heartLives<=1)
             Another.setEnabled(false);
-        else{
-            anotherGame();
-        }
+        
+        anotherGame();
     }//GEN-LAST:event_AnotherActionPerformed
 
     int time=900;

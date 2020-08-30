@@ -4,13 +4,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import static protest2.Home.audioStream;
-import static protest2.Home.gongFile;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
@@ -21,12 +20,13 @@ import sun.audio.AudioStream;
 public class EasyGame extends javax.swing.JFrame {
 
     public static int score=0;
-    public static int heartLives;
+    public static int heartLives=3;
     
     String str[];
     String word,temp;
     char ch[];
     ArrayList<Integer> al=new ArrayList<>();
+    HashSet<Integer> hash=new HashSet<>();
     char butt;
     String show;
     String hint;
@@ -35,7 +35,27 @@ public class EasyGame extends javax.swing.JFrame {
     
     Home homeRef;
     
+    public void setWordsFromFile(){
+        String t="";
+        String st[];
+        int ch;
+        try{
+           
+           FileReader fr=new FileReader("C:\\Users\\Uttam\\Documents\\Git\\TheHangmanGame_Git\\src\\words.txt");
+           while ((ch=fr.read())!=-1){
+               t=t+(""+(char)ch);
+           }
+           st=t.split("\r\n");
+           str=st;
+           
+        }catch(Exception e){
+            System.out.println("dfsf");
+            setWords();
+        }
+    }
+    
     public void setWords(){
+        
         String tempStr[]={
 "abruptly" ,
 "absurd" ,
@@ -210,7 +230,7 @@ public class EasyGame extends javax.swing.JFrame {
     
     public EasyGame() {
         initComponents();
-        setWords();
+        setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         newGame();
     }
@@ -219,7 +239,7 @@ public class EasyGame extends javax.swing.JFrame {
         homeRef=home;
         initComponents();
         heartLives=3;
-        setWords();
+        setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         newGame();
     }
@@ -264,9 +284,19 @@ public class EasyGame extends javax.swing.JFrame {
             fire.setVisible(true);
             fire1.setVisible(true);
             //music.doClick();
+            
+            
+            if(heartLives<=1)
+            Another.setEnabled(false);
 
-
-            word= str[(int) (Math.random() * (str.length-1))];
+            int r=(int)(Math.random() * (str.length-1));
+            if(hash.contains(r))
+                r=(int)(Math.random() * (str.length-1));
+            if(hash.contains(r))
+                r=(int)(Math.random() * (str.length-1));
+            
+            hash.add(r);
+            word= str[r];
             word=word.toUpperCase();
             int len=word.length();
             
@@ -277,7 +307,7 @@ public class EasyGame extends javax.swing.JFrame {
             
             //easyInitials
             temp=temp+word.charAt(0);
-            for(int i=0;i<len;i++)
+            for(int i=0;i<len-2;i++)
                 temp=temp+"-";
             temp=temp+word.charAt(word.length()-1);
             
@@ -378,7 +408,8 @@ public class EasyGame extends javax.swing.JFrame {
             fire1.setVisible(false);
             BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
             
-            new WinDialogEasy(this,this,true).show();
+            new MediumGame(homeRef, this,heartLives,score).show();
+            this.dispose();
         }
         
         
@@ -490,6 +521,7 @@ public class EasyGame extends javax.swing.JFrame {
         homeRef.show();
         timerReset();
         this.dispose();
+        
     }
    
     public void alphabetSound(){
@@ -1388,11 +1420,10 @@ public class EasyGame extends javax.swing.JFrame {
 
     private void AnotherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnotherActionPerformed
         heartLives--;
-        if(heartLives==1)
+        if(heartLives<=1)
             Another.setEnabled(false);
-        else{
-            anotherGame();
-        }
+        
+        anotherGame();
     }//GEN-LAST:event_AnotherActionPerformed
 
     int time=900;

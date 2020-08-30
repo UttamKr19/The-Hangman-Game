@@ -64,6 +64,11 @@ public class LoseDialogMedium extends javax.swing.JDialog {
         mediumRef=ref;
 //        tButt.setVisible(false);
 //        tButt.doClick();
+
+        if(mediumRef.heartLives<=0){
+            playAgainButton.setEnabled(false);
+        }
+        
         if("noChance".equals(reason))
             reason="                                No Guesses Left!!";
         else if("noTime".equals(reason))

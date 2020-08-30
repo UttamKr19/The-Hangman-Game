@@ -20,7 +20,7 @@ import sun.audio.AudioStream;
  *
  * @author Uttam
  */
-public class LoseDialogEasy extends javax.swing.JDialog {
+public class LoseDialogHard extends javax.swing.JDialog {
 
     /**
      * A return status code - returned if Cancel button has been pressed
@@ -35,7 +35,7 @@ public class LoseDialogEasy extends javax.swing.JDialog {
      * Creates new form LoseDialog
      */
     
-    public LoseDialogEasy(java.awt.Frame parent, boolean modal) {
+    public LoseDialogHard(java.awt.Frame parent, boolean modal) {
         
         super(parent, modal);
         initComponents();
@@ -55,15 +55,15 @@ public class LoseDialogEasy extends javax.swing.JDialog {
     }
     
     
-    EasyGame easyRef;
-    public LoseDialogEasy(java.awt.Frame parent,EasyGame ref, 
+    HardGame hardRef;
+    public LoseDialogHard(java.awt.Frame parent,HardGame ref, 
             boolean modal,String reason,int heartLives,int score) {
         
         super(parent, modal);
         initComponents();
-        easyRef=ref;
+        hardRef=ref;
         
-        if(easyRef.heartLives<=0){
+        if(hardRef.heartLives<=0){
             playAgainButton.setEnabled(false);
         }
         
@@ -74,7 +74,7 @@ public class LoseDialogEasy extends javax.swing.JDialog {
         else
             reason="                                No lives left";
         
-        easyRef.revealWord(reason);
+        hardRef.revealWord(reason);
         ReasonText.setText(reason);
         
         String cancelName = "cancel";
@@ -139,9 +139,7 @@ public class LoseDialogEasy extends javax.swing.JDialog {
 
         setBounds(new java.awt.Rectangle(350, 250, 600, 450));
         setLocation(new java.awt.Point(350, 200));
-        setMaximumSize(new java.awt.Dimension(640, 440));
         setMinimumSize(new java.awt.Dimension(640, 430));
-        setPreferredSize(new java.awt.Dimension(650, 400));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -203,12 +201,12 @@ public class LoseDialogEasy extends javax.swing.JDialog {
 
     private void playAgainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playAgainButtonActionPerformed
         menuSound();
-        if(easyRef.heartLives<=0){
+        if(hardRef.heartLives==0){
             playAgainButton.setEnabled(false);
         }
         else{
             doClose(RET_OK);
-            easyRef.anotherGame();
+            hardRef.anotherGame();
         }
         
     }//GEN-LAST:event_playAgainButtonActionPerformed
@@ -216,8 +214,8 @@ public class LoseDialogEasy extends javax.swing.JDialog {
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
         menuSound();
         doClose(RET_CANCEL);
-        easyRef.backButton();
-        easyRef.dispose();
+        hardRef.backButton();
+        hardRef.dispose();
         this.dispose();
         
     }//GEN-LAST:event_quitButtonActionPerformed
@@ -228,8 +226,8 @@ public class LoseDialogEasy extends javax.swing.JDialog {
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         menuSound();
         doClose(RET_CANCEL);
-        easyRef.backButton();
-        easyRef.dispose();
+        hardRef.backButton();
+        hardRef.dispose();
         this.dispose();
     }//GEN-LAST:event_closeDialog
 
@@ -266,20 +264,23 @@ public class LoseDialogEasy extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoseDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoseDialogHard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoseDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoseDialogHard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoseDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoseDialogHard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoseDialogEasy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoseDialogHard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                LoseDialogEasy dialog = new LoseDialogEasy(new javax.swing.JFrame(), true);
+                LoseDialogHard dialog = new LoseDialogHard(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
