@@ -23,7 +23,7 @@ import sun.audio.AudioStream;
 public class MediumGame extends javax.swing.JFrame {
 
     public static int score=0;
-    public static int heartLives=3;
+    public static int heartLives=2;
     
     String str[];
     String word,temp;
@@ -38,198 +38,6 @@ public class MediumGame extends javax.swing.JFrame {
     
     Home homeRef;
     EasyGame easyRef;
-    
-      
-    public void setWordsFromFile(){
-        String t="";
-        String st[];
-        int ch;
-        try{
-           
-           FileReader fr=new FileReader("C:\\Users\\Uttam\\Documents\\Git\\TheHangmanGame_Git\\src\\words.txt");
-           while ((ch=fr.read())!=-1){
-               t=t+(""+(char)ch);
-           }
-           st=t.split("\r\n");
-           str=st;
-           
-        }catch(Exception e){
-            System.out.println("dfsf");
-            setWords();
-        }
-    }
-    public void setWords(){
-        String tempStr[]={
-"abruptly" ,
-"absurd" ,
-"abyss" ,
-//"affix" ,
-//"avenue" ,
-//"awkward" ,
-//"axiom" ,
-//
-//"bagpipes" ,
-//"bandwagon" ,
-//"beekeeper" ,
-//"bikini" ,
-//"blitz" ,
-//"blizzard" ,
-//"boggle" ,
-//"bookworm" ,
-//"boxcar" ,
-//"boxful" ,
-//"buffalo" ,
-//"buffoon" ,
-//"buzzing" ,
-//"buzzwords" ,
-//
-//"cockiness" ,
-//"croquet" ,
-//"crypt" ,
-//"cycle" ,
-//
-//"dizzying" ,
-//"duplex" ,
-//"dwarves" ,
-//
-//"embezzle" ,
-//"equip" ,
-//"espionage" ,
-//"exodus" ,
-//"faking" ,
-//"fishhook" ,
-//"fixable" ,
-//"flopping" ,
-//"fluffiness" ,
-//"frizzled" ,
-//"fuchsia" ,"funny" ,
-//
-//"gabby" ,"galaxy" ,"galvanize" ,
-//"glowworm" ,
-//"gnarly" ,
-//"gossip" ,
-//"grogginess" ,
-//
-//"haphazard" ,
-//"hyphen" ,
-//
-//"iatrogenic" ,
-//"icebox" ,
-//"injury" ,
-//"ivory" ,
-//"ivy" ,
-//
-//"jackpot" ,
-//"jaundice" ,
-//"jawbreaker" ,
-//"jazziest" ,
-//"jazzy" ,
-//"jelly" ,
-//"jigsaw" ,
-//"jinx" ,
-//"jiujitsu" ,
-//"jockey" ,
-//"jogging" ,
-//"joking" ,
-//"jovial" ,
-//"joyful" ,
-//"juicy" ,
-//"jukebox" ,
-//"jumbo" ,
-//
-//
-//"keyhole" ,
-//"khaki" ,
-//"kilobyte" ,
-//"knapsack" ,
-//
-//"larynx" ,
-//"lengths" ,
-//"lucky" ,
-//"luxury" ,
-//"lymph" ,
-//
-//"matrix" ,
-//"megahertz" ,
-//"microwave" ,
-//"mnemonic" ,
-//"mystify" ,
-//
-//"nightclub" ,
-//"nowadays" ,
-//"numbskull" ,
-//"nymph" ,
-//
-//"ovary" ,
-//"oxidize" ,
-//"oxygen" ,
-//
-//"pajama" ,
-//"peekaboo" ,
-//"phlegm" ,
-//"pixel" ,
-//"pneumonia" ,
-//"psyche" ,
-//"puppy" ,
-//"puzzling" ,
-//
-//"quartz" ,
-//"queue" ,
-//"quixotic" ,
-//"quiz" ,
-//"quizzes" ,
-//
-//"rhythm" ,
-//"rickshaw" ,
-//
-//"squawk" ,
-//"staff" ,
-//"strength" ,
-//"strengths" ,
-//"stretch" ,
-//"subway" ,
-//"syndrome" ,
-//
-//"thriftless" ,
-//"thumbscrew" ,
-//"transcript" ,
-//"transplant" ,
-//
-//"unknown" ,
-//"unworthy" ,
-//"unzip" ,
-//"uptown" ,
-//"vaporize" ,
-//"vixen" ,
-//"vodka" ,
-//"voodoo" ,
-//"vortex" ,
-//
-//"wave" ,
-//"waxy" ,
-//"wellspring" ,
-//"wheezy" ,
-//"whiskey" ,
-//"whizzing" ,
-//"whomever" ,
-//"witchcraft" ,
-//"wizard" ,
-//"wristwatch" ,
-//
-//"xylophone" ,
-//
-//"yachtsman" ,
-//"youthful" ,
-//"yummy" ,
-//
-//"zigzag" ,
-//"zigzagging" ,
-//"zipper" ,
-//"zodiac" ,
-"zombie"
-    };
-       str=tempStr; 
- }
     
     public MediumGame() {
         initComponents();
@@ -250,11 +58,203 @@ public class MediumGame extends javax.swing.JFrame {
         newGame();
     }
     
+    public void setWordsFromFile(){
+        String t="";
+        String st[];
+        int ch;
+        try{
+           
+           FileReader fr=new FileReader("src\\data\\words.txt");
+           while ((ch=fr.read())!=-1){
+               t=t+(""+(char)ch);
+           }
+           st=t.split("\r\n");
+           str=st;
+           
+        }catch(Exception e){
+            System.out.println("dfsf "+e);
+            setWords();
+        }
+    }
+    
+    public void setWords(){
+        String tempStr[]={
+"abruptly" ,
+"absurd" ,
+"abyss" ,
+"affix" ,
+"avenue" ,
+"awkward" ,
+"axiom" ,
+
+"bagpipes" ,
+"bandwagon" ,
+"beekeeper" ,
+"bikini" ,
+"blitz" ,
+"blizzard" ,
+"boggle" ,
+"bookworm" ,
+"boxcar" ,
+"boxful" ,
+"buffalo" ,
+"buffoon" ,
+"buzzing" ,
+"buzzwords" ,
+
+"cockiness" ,
+"croquet" ,
+"crypt" ,
+"cycle" ,
+
+"dizzying" ,
+"duplex" ,
+"dwarves" ,
+
+"embezzle" ,
+"equip" ,
+"espionage" ,
+"exodus" ,
+"faking" ,
+"fishhook" ,
+"fixable" ,
+"flopping" ,
+"fluffiness" ,
+"frizzled" ,
+"fuchsia" ,"funny" ,
+
+"gabby" ,"galaxy" ,"galvanize" ,
+"glowworm" ,
+"gnarly" ,
+"gossip" ,
+"grogginess" ,
+
+"haphazard" ,
+"hyphen" ,
+
+"iatrogenic" ,
+"icebox" ,
+"injury" ,
+"ivory" ,
+"ivy" ,
+
+"jackpot" ,
+"jaundice" ,
+"jawbreaker" ,
+"jazziest" ,
+"jazzy" ,
+"jelly" ,
+"jigsaw" ,
+"jinx" ,
+"jiujitsu" ,
+"jockey" ,
+"jogging" ,
+"joking" ,
+"jovial" ,
+"joyful" ,
+"juicy" ,
+"jukebox" ,
+"jumbo" ,
+
+
+"keyhole" ,
+"khaki" ,
+"kilobyte" ,
+"knapsack" ,
+
+"larynx" ,
+"lengths" ,
+"lucky" ,
+"luxury" ,
+"lymph" ,
+
+"matrix" ,
+"megahertz" ,
+"microwave" ,
+"mnemonic" ,
+"mystify" ,
+
+"nightclub" ,
+"nowadays" ,
+"numbskull" ,
+"nymph" ,
+
+"ovary" ,
+"oxidize" ,
+"oxygen" ,
+
+"pajama" ,
+"peekaboo" ,
+"phlegm" ,
+"pixel" ,
+"pneumonia" ,
+"psyche" ,
+"puppy" ,
+"puzzling" ,
+
+"quartz" ,
+"queue" ,
+"quixotic" ,
+"quiz" ,
+"quizzes" ,
+
+"rhythm" ,
+"rickshaw" ,
+
+"squawk" ,
+"staff" ,
+"strength" ,
+"strengths" ,
+"stretch" ,
+"subway" ,
+"syndrome" ,
+
+"thriftless" ,
+"thumbscrew" ,
+"transcript" ,
+"transplant" ,
+
+"unknown" ,
+"unworthy" ,
+"unzip" ,
+"uptown" ,
+"vaporize" ,
+"vixen" ,
+"vodka" ,
+"voodoo" ,
+"vortex" ,
+
+"wave" ,
+"waxy" ,
+"wellspring" ,
+"wheezy" ,
+"whiskey" ,
+"whizzing" ,
+"whomever" ,
+"witchcraft" ,
+"wizard" ,
+"wristwatch" ,
+
+"xylophone" ,
+
+"yachtsman" ,
+"youthful" ,
+"yummy" ,
+
+"zigzag" ,
+"zigzagging" ,
+"zipper" ,
+"zodiac" ,
+"zombie"
+    };
+       str=tempStr; 
+ }
+    
     static AudioStream audioStream;
     
     static void playWinLoseSound(){
         try{
-            String gongFile = "src/sounds/button-3.wav";
+            String gongFile = "src/sounds/menu.wav";
             InputStream in = new FileInputStream(gongFile);
             audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
@@ -270,43 +270,53 @@ public class MediumGame extends javax.swing.JFrame {
     }
     
     public void setInitialElements(){
-            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Normal.jpg"));
-            pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
-            xPanda=1000;
-            yPanda=-350;
-            pandaAlive.setBounds(xPanda, yPanda, 230, 730);
-
-            pandaAlive.setVisible(true);
+            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\mediumBack.jpg"));
+            
+            xPanda=280;
+            xMonster=-300;
+            //yMonster=220;
+            pandaRun.setBounds(xPanda, pandaRun.getY(), pandaRun.getWidth(),pandaRun.getHeight());
+            monster1.setBounds(xMonster, monster1.getY(), monster1.getWidth(), monster1.getHeight());
+            wordspace.setBounds(480,280,wordspace.getWidth(),wordspace.getHeight());
+            
+            pandaRun.setVisible(true);
             pandaDead.setVisible(false);
 
             timerResetButton.doClick();
             clockText.setForeground(Color.WHITE);
             ProgressBar.setValue(100);
             ProgressBar.setForeground(Color.green);
-            wordspace.setForeground(Color.black);
+            wordspace.setForeground(Color.white);
             chances=6;
             chancesValue.setText(String.valueOf(chances));
+            chancesValue.setVisible(false);
+            clockText.setVisible(false);
             lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
-            fire.setVisible(true);
-            fire1.setVisible(true);
+            //pandaRun.setVisible(true);
+            monster1.setVisible(true);
             //music.doClick();
             
             if(heartLives<=1)
             Another.setEnabled(false);
 
 
-            int r=(int)(Math.random() * (str.length-1));
-            if(hash.contains(r))
+            int r=0;
+            do{
                 r=(int)(Math.random() * (str.length-1));
-            if(hash.contains(r))
-                r=(int)(Math.random() * (str.length-1));
+                
+            }while(hash.contains(r));
             
             hash.add(r);
             word= str[r];
             word=word.toUpperCase();
             int len=word.length();
+            int compLen=15;
+            while(len<compLen){
+                wordspace.setBounds(wordspace.getX()+30, wordspace.getY(),
+                        wordspace.getWidth(), wordspace.getHeight());
+                compLen-=3;
+            }
             
-
             temp="";
             hint="";
             
@@ -349,32 +359,32 @@ public class MediumGame extends javax.swing.JFrame {
         
         switch (chances) {
             case 6:
-                pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
+                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
                 //ProgressBar.setValue(100);
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
                 break;
             case 5:
-                pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda50.png"));
+                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda50.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live5.png"));
                 ProgressBar.setForeground(Color.yellow);
                 break;
             case 4:
-                pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda40.png"));
+                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda40.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live4.png"));
                 ProgressBar.setForeground(Color.yellow);
                 break;
             case 3:
-                pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda30.png"));
+                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda30.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live3.png"));
                 ProgressBar.setForeground(Color.orange);
                 break;
             case 2:
-                pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda20.png"));
+                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda20.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live2.png"));
                 ProgressBar.setForeground(Color.orange);
                 break;
             case 1:
-                pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda10.png"));
+                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda10.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live1.png"));
                 ProgressBar.setForeground(Color.red);
                 break;
@@ -393,8 +403,8 @@ public class MediumGame extends javax.swing.JFrame {
         ProgressBar.setValue(0);
         pandaDead.setVisible(true);
         
-        pandaAlive.setVisible(false);
-        BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
+        //pandaRun.setVisible(false);
+        //BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
         
         
         //LoseReason="ZeroGuesses";
@@ -408,11 +418,11 @@ public class MediumGame extends javax.swing.JFrame {
         else if(word.equals(show)){
             playWinLoseSound();
             revealWord("win");
-            pandaAlive.setVisible(false);
+            //pandaRun.setVisible(false);
             timerReset();
-            fire.setVisible(false);
-            fire1.setVisible(false);
-            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
+            //pandaRun.setVisible(false);
+            monster1.setVisible(false);
+            //BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
             
             new HardGame(homeRef,this,heartLives,score).show();
             this.dispose();
@@ -580,6 +590,7 @@ public class MediumGame extends javax.swing.JFrame {
         lives = new javax.swing.JLabel();
         chancesValue = new javax.swing.JLabel();
         wordspace = new javax.swing.JLabel();
+        monster1 = new javax.swing.JLabel();
         Another = new javax.swing.JButton();
         A = new javax.swing.JButton();
         B = new javax.swing.JButton();
@@ -587,13 +598,11 @@ public class MediumGame extends javax.swing.JFrame {
         D = new javax.swing.JButton();
         Z = new javax.swing.JButton();
         E = new javax.swing.JButton();
-        bird = new javax.swing.JLabel();
         F = new javax.swing.JButton();
         G = new javax.swing.JButton();
         H = new javax.swing.JButton();
         I = new javax.swing.JButton();
         J = new javax.swing.JButton();
-        pandaAlive = new javax.swing.JLabel();
         L = new javax.swing.JButton();
         M = new javax.swing.JButton();
         K = new javax.swing.JButton();
@@ -607,16 +616,20 @@ public class MediumGame extends javax.swing.JFrame {
         P = new javax.swing.JButton();
         V = new javax.swing.JButton();
         W = new javax.swing.JButton();
+        pandaRun = new javax.swing.JLabel();
         X = new javax.swing.JButton();
         Y = new javax.swing.JButton();
         timerResetButton = new javax.swing.JButton();
         clockText = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         ProgressBar = new javax.swing.JProgressBar();
-        fire = new javax.swing.JLabel();
         pandaDead = new javax.swing.JLabel();
-        fire1 = new javax.swing.JLabel();
         music = new javax.swing.JButton();
+        pandaRun1 = new javax.swing.JLabel();
+        pandaRun2 = new javax.swing.JLabel();
+        fire1 = new javax.swing.JLabel();
+        fire2 = new javax.swing.JLabel();
+        fire3 = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -626,20 +639,26 @@ public class MediumGame extends javax.swing.JFrame {
         lives.setForeground(new java.awt.Color(51, 0, 0));
         lives.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Live6.png"))); // NOI18N
         getContentPane().add(lives);
-        lives.setBounds(670, 170, 200, 40);
+        lives.setBounds(620, 30, 200, 40);
 
         chancesValue.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         chancesValue.setForeground(new java.awt.Color(51, 0, 0));
         chancesValue.setText("8");
         getContentPane().add(chancesValue);
-        chancesValue.setBounds(890, 160, 20, 50);
+        chancesValue.setBounds(160, 160, 20, 50);
 
         wordspace.setBackground(new java.awt.Color(102, 0, 0));
         wordspace.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
-        wordspace.setText("ABCD");
+        wordspace.setForeground(new java.awt.Color(255, 255, 255));
+        wordspace.setText("ABCDEFGHI");
         wordspace.setName(""); // NOI18N
         getContentPane().add(wordspace);
-        wordspace.setBounds(500, 50, 400, 90);
+        wordspace.setBounds(480, 280, 470, 90);
+
+        monster1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/monster4.gif"))); // NOI18N
+        monster1.setText(" ");
+        getContentPane().add(monster1);
+        monster1.setBounds(100, 360, 270, 230);
 
         Another.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/change.png"))); // NOI18N
         Another.setToolTipText("Change Word");
@@ -658,7 +677,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Another);
-        Another.setBounds(920, 100, 40, 40);
+        Another.setBounds(140, 90, 40, 40);
 
         A.setBackground(new java.awt.Color(25, 0, 0));
         A.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -673,7 +692,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(A);
-        A.setBounds(210, 550, 70, 60);
+        A.setBounds(1040, 200, 70, 60);
 
         B.setBackground(new java.awt.Color(25, 0, 0));
         B.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -688,7 +707,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B);
-        B.setBounds(40, 340, 70, 60);
+        B.setBounds(970, 100, 70, 60);
 
         C.setBackground(new java.awt.Color(25, 0, 0));
         C.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -703,7 +722,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(C);
-        C.setBounds(110, 270, 70, 60);
+        C.setBounds(410, 220, 70, 60);
 
         D.setBackground(new java.awt.Color(25, 0, 0));
         D.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -718,7 +737,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(D);
-        D.setBounds(230, 490, 70, 60);
+        D.setBounds(1050, 140, 70, 60);
 
         Z.setBackground(new java.awt.Color(25, 0, 0));
         Z.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -733,7 +752,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Z);
-        Z.setBounds(210, 200, 70, 60);
+        Z.setBounds(1020, 70, 70, 60);
 
         E.setBackground(new java.awt.Color(25, 0, 0));
         E.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -748,14 +767,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(E);
-        E.setBounds(50, 270, 70, 60);
-
-        bird.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
-        bird.setForeground(new java.awt.Color(255, 255, 255));
-        bird.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birds.gif"))); // NOI18N
-        bird.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
-        getContentPane().add(bird);
-        bird.setBounds(60, 140, 390, 260);
+        E.setBounds(350, 240, 70, 60);
 
         F.setBackground(new java.awt.Color(25, 0, 0));
         F.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -770,7 +782,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(F);
-        F.setBounds(350, 420, 70, 60);
+        F.setBounds(430, 50, 70, 60);
 
         G.setBackground(new java.awt.Color(25, 0, 0));
         G.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -785,7 +797,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(G);
-        G.setBounds(350, 340, 70, 60);
+        G.setBounds(950, 50, 70, 60);
 
         H.setBackground(new java.awt.Color(25, 0, 0));
         H.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -800,7 +812,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(H);
-        H.setBounds(50, 490, 70, 60);
+        H.setBounds(400, 160, 70, 60);
 
         I.setBackground(new java.awt.Color(25, 0, 0));
         I.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -815,7 +827,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(I);
-        I.setBounds(290, 420, 70, 60);
+        I.setBounds(410, 110, 70, 60);
 
         J.setBackground(new java.awt.Color(25, 0, 0));
         J.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -830,11 +842,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(J);
-        J.setBounds(100, 350, 70, 60);
-
-        pandaAlive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda6.png"))); // NOI18N
-        getContentPane().add(pandaAlive);
-        pandaAlive.setBounds(1040, -160, 230, 930);
+        J.setBounds(970, 210, 70, 60);
 
         L.setBackground(new java.awt.Color(25, 0, 0));
         L.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -849,7 +857,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(L);
-        L.setBounds(110, 430, 70, 60);
+        L.setBounds(360, 70, 70, 60);
 
         M.setBackground(new java.awt.Color(25, 0, 0));
         M.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -864,7 +872,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(M);
-        M.setBounds(290, 330, 70, 60);
+        M.setBounds(990, 10, 70, 60);
 
         K.setBackground(new java.awt.Color(25, 0, 0));
         K.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -879,7 +887,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(K);
-        K.setBounds(290, 260, 70, 60);
+        K.setBounds(1110, 210, 70, 60);
 
         N.setBackground(new java.awt.Color(25, 0, 0));
         N.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -894,7 +902,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(N);
-        N.setBounds(170, 420, 70, 60);
+        N.setBounds(330, 30, 70, 60);
 
         T.setBackground(new java.awt.Color(25, 0, 0));
         T.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -909,7 +917,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(T);
-        T.setBounds(230, 350, 70, 60);
+        T.setBounds(330, 190, 70, 60);
 
         S.setBackground(new java.awt.Color(25, 0, 0));
         S.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -924,7 +932,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(S);
-        S.setBounds(50, 420, 70, 60);
+        S.setBounds(280, 150, 70, 60);
 
         O.setBackground(new java.awt.Color(25, 0, 0));
         O.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -939,7 +947,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(O);
-        O.setBounds(170, 260, 70, 60);
+        O.setBounds(920, 0, 70, 60);
 
         U.setBackground(new java.awt.Color(25, 0, 0));
         U.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -954,7 +962,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(U);
-        U.setBounds(230, 270, 70, 60);
+        U.setBounds(260, 210, 70, 60);
 
         R.setBackground(new java.awt.Color(25, 0, 0));
         R.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -969,7 +977,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(R);
-        R.setBounds(350, 260, 70, 60);
+        R.setBounds(340, 130, 70, 60);
 
         Q.setBackground(new java.awt.Color(25, 0, 0));
         Q.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -984,7 +992,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Q);
-        Q.setBounds(170, 490, 70, 60);
+        Q.setBounds(1080, 90, 70, 60);
 
         P.setBackground(new java.awt.Color(25, 0, 0));
         P.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -999,7 +1007,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(P);
-        P.setBounds(110, 500, 70, 60);
+        P.setBounds(470, 0, 70, 60);
 
         V.setBackground(new java.awt.Color(25, 0, 0));
         V.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1014,7 +1022,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(V);
-        V.setBounds(230, 430, 70, 60);
+        V.setBounds(400, 10, 70, 60);
 
         W.setBackground(new java.awt.Color(25, 0, 0));
         W.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1029,7 +1037,12 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(W);
-        W.setBounds(290, 490, 70, 60);
+        W.setBounds(980, 150, 70, 60);
+
+        pandaRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pandaRunning.gif"))); // NOI18N
+        pandaRun.setText(" ");
+        getContentPane().add(pandaRun);
+        pandaRun.setBounds(480, 470, 160, 110);
 
         X.setBackground(new java.awt.Color(25, 0, 0));
         X.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1044,7 +1057,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(X);
-        X.setBounds(160, 340, 70, 60);
+        X.setBounds(1120, 150, 70, 60);
 
         Y.setBackground(new java.awt.Color(25, 0, 0));
         Y.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1059,7 +1072,7 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Y);
-        Y.setBounds(350, 480, 70, 60);
+        Y.setBounds(300, 90, 70, 60);
 
         timerResetButton.setText("timerReset");
         timerResetButton.setFocusable(false);
@@ -1071,11 +1084,11 @@ public class MediumGame extends javax.swing.JFrame {
         getContentPane().add(timerResetButton);
         timerResetButton.setBounds(1080, 720, 130, 23);
 
-        clockText.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        clockText.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         clockText.setForeground(new java.awt.Color(255, 255, 255));
         clockText.setText("45");
         getContentPane().add(clockText);
-        clockText.setBounds(720, 360, 90, 90);
+        clockText.setBounds(1220, 90, 50, 30);
 
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/backbutt.png"))); // NOI18N
         backButton.setText("Back");
@@ -1103,22 +1116,12 @@ public class MediumGame extends javax.swing.JFrame {
         ProgressBar.setFocusable(false);
         ProgressBar.setPreferredSize(new java.awt.Dimension(417, 22));
         getContentPane().add(ProgressBar);
-        ProgressBar.setBounds(495, 144, 417, 22);
-
-        fire.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire.gif"))); // NOI18N
-        fire.setText(" ");
-        getContentPane().add(fire);
-        fire.setBounds(910, 460, 530, 220);
+        ProgressBar.setBounds(540, 10, 380, 22);
 
         pandaDead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda0.png"))); // NOI18N
         pandaDead.setText(" ");
         getContentPane().add(pandaDead);
-        pandaDead.setBounds(1040, 530, 290, 120);
-
-        fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire.gif"))); // NOI18N
-        fire1.setText(" ");
-        getContentPane().add(fire1);
-        fire1.setBounds(980, 460, 530, 220);
+        pandaDead.setBounds(830, 540, 290, 120);
 
         music.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/musicPlay.png"))); // NOI18N
         music.setToolTipText("Play/Stop Backgroud Music");
@@ -1135,9 +1138,34 @@ public class MediumGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(music);
-        music.setBounds(920, 50, 40, 40);
+        music.setBounds(80, 90, 40, 40);
 
-        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/extBG_Normal.jpg"))); // NOI18N
+        pandaRun1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon3.gif"))); // NOI18N
+        pandaRun1.setText(" ");
+        getContentPane().add(pandaRun1);
+        pandaRun1.setBounds(410, 120, 240, 160);
+
+        pandaRun2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon10.gif"))); // NOI18N
+        pandaRun2.setText(" ");
+        getContentPane().add(pandaRun2);
+        pandaRun2.setBounds(650, 150, 230, 140);
+
+        fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire9.gif"))); // NOI18N
+        fire1.setText(" ");
+        getContentPane().add(fire1);
+        fire1.setBounds(600, 20, 190, 120);
+
+        fire2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire10.gif"))); // NOI18N
+        fire2.setText(" ");
+        getContentPane().add(fire2);
+        fire2.setBounds(455, 70, 130, 130);
+
+        fire3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire10.gif"))); // NOI18N
+        fire3.setText(" ");
+        getContentPane().add(fire3);
+        fire3.setBounds(848, 90, 120, 90);
+
+        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/mediumBack.jpg"))); // NOI18N
         BackImage.setText(".");
         getContentPane().add(BackImage);
         BackImage.setBounds(0, 0, 1380, 770);
@@ -1436,59 +1464,46 @@ public class MediumGame extends javax.swing.JFrame {
     boolean timeFlag=false;
     int timeText;
     
-    int xPanda=1000;
-    int yPanda=-350;
+    int xPanda=350;
+    int yPanda=500;
     int ySoul=430;
+    int xMonster=-100;
+    int yMonster=350;
+    
     
     private void timerResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerResetButtonActionPerformed
         
-        time=459;
+        time=409;
         
         timer = new Timer(100, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         
         timeText=time/10;
-        double temp=100/45.9*((double)time/10);
+        double temp=(100/(double)40.9)*((double)time/10);
         ProgressBar.setValue((int)temp);
         
-        if (timeText >= 0 && yPanda<100) {
+        if (timeText >= 0 && pandaRun.getX()>100) {
             clockText.setText(Integer.toString(timeText));
             
             //----------------------------------------
-            int xInc=1;
+            if(timeText>20){
+                xMonster+=3;
+            }
+            else{
+                xMonster+=4;
+            }
+                
+            if(timeText<35 && timeText%2==0){
+                //yMonster++;
+            }
+            if(timeText<20){
+                xPanda++;
+            }
+            xPanda+=2;
             
-                yPanda+=1;
-            
-            if(yPanda>-350 && yPanda<-300){
-                xPanda+=xInc;
-            }
-            else if(yPanda>-300 && yPanda<-250){
-                xPanda-=xInc;
-            }
-            else if(yPanda>-250 && yPanda<-200){
-                xPanda+=xInc;
-            }
-            else if(yPanda>-200 && yPanda<-150){
-                xPanda-=xInc;
-            }   
-            else if(yPanda>-150 && yPanda<-100){
-                xPanda+=xInc;
-            }   
-            else if(yPanda>-100 && yPanda<-50){
-                xPanda-=xInc;
-            }
-            else if(yPanda>-50 && yPanda<0){
-                xPanda+=xInc;
-            }
-            else if(yPanda>0 && yPanda<50){
-                xPanda-=xInc;
-            }
-            else if(yPanda>50 && yPanda<100){
-                xPanda+=xInc;
-            }
-            
-            pandaAlive.setBounds(xPanda, yPanda, 230, 730);
+            pandaRun.setBounds(xPanda, pandaRun.getY(), pandaRun.getWidth(),pandaRun.getHeight());
+            monster1.setBounds(xMonster, yMonster, monster1.getWidth(), monster1.getHeight());
             
             if(timeText<10){
                 clockText.setText(" "+Integer.toString(timeText));
@@ -1499,6 +1514,8 @@ public class MediumGame extends javax.swing.JFrame {
             }
             time--;
             
+            
+            
         } else {
            clockText.setText(" 0"); 
            //LoseReason="Timeout";
@@ -1508,8 +1525,8 @@ public class MediumGame extends javax.swing.JFrame {
             timerReset();
             //LoseReason="Timeout";
             ProgressBar.setValue(0);
-            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
-            pandaAlive.setVisible(false);
+            //BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
+            //pandaRunning.setVisible(false);
             pandaDead.setVisible(true);
             revealWord("lose");
             loseWindow("noTime");
@@ -1633,15 +1650,18 @@ public class MediumGame extends javax.swing.JFrame {
     private javax.swing.JButton Y;
     private javax.swing.JButton Z;
     private javax.swing.JButton backButton;
-    private javax.swing.JLabel bird;
     private javax.swing.JLabel chancesValue;
     private javax.swing.JLabel clockText;
-    private javax.swing.JLabel fire;
     private javax.swing.JLabel fire1;
+    private javax.swing.JLabel fire2;
+    private javax.swing.JLabel fire3;
     private javax.swing.JLabel lives;
+    private javax.swing.JLabel monster1;
     private javax.swing.JButton music;
-    private javax.swing.JLabel pandaAlive;
     private javax.swing.JLabel pandaDead;
+    private javax.swing.JLabel pandaRun;
+    private javax.swing.JLabel pandaRun1;
+    private javax.swing.JLabel pandaRun2;
     private javax.swing.JButton timerResetButton;
     private javax.swing.JLabel wordspace;
     // End of variables declaration//GEN-END:variables

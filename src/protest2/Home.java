@@ -73,18 +73,21 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fire1 = new javax.swing.JLabel();
+        dashboardDragon = new javax.swing.JLabel();
         menu = new javax.swing.JLabel();
         PlayWorking = new javax.swing.JPanel();
         CreditsWorking = new javax.swing.JPanel();
         QuitWorking = new javax.swing.JPanel();
         HowToPlayWorking = new javax.swing.JPanel();
-        skeleton = new javax.swing.JLabel();
         title = new javax.swing.JLabel();
+        skeleton = new javax.swing.JLabel();
+        fire4 = new javax.swing.JLabel();
+        fire1 = new javax.swing.JLabel();
         animation = new javax.swing.JButton();
         flare = new javax.swing.JLabel();
         FlareBlue1 = new javax.swing.JLabel();
-        bats = new javax.swing.JLabel();
+        fire2 = new javax.swing.JLabel();
+        fire3 = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,9 +97,9 @@ public class Home extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire8.gif"))); // NOI18N
-        getContentPane().add(fire1);
-        fire1.setBounds(120, 540, 480, 220);
+        dashboardDragon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bat_animation.gif"))); // NOI18N
+        getContentPane().add(dashboardDragon);
+        dashboardDragon.setBounds(360, 180, 390, 320);
 
         menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dash3menu.png"))); // NOI18N
         menu.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
@@ -171,14 +174,22 @@ public class Home extends javax.swing.JFrame {
         getContentPane().add(HowToPlayWorking);
         HowToPlayWorking.setBounds(560, 520, 240, 50);
 
-        skeleton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/skeleton2.gif"))); // NOI18N
-        getContentPane().add(skeleton);
-        skeleton.setBounds(930, 310, 110, 310);
-
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title.png"))); // NOI18N
         title.setText(" ");
         getContentPane().add(title);
         title.setBounds(270, 30, 780, 220);
+
+        skeleton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birds.gif"))); // NOI18N
+        getContentPane().add(skeleton);
+        skeleton.setBounds(0, 120, 440, 200);
+
+        fire4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon15.gif"))); // NOI18N
+        getContentPane().add(fire4);
+        fire4.setBounds(1180, 330, 260, 260);
+
+        fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire12.gif"))); // NOI18N
+        getContentPane().add(fire1);
+        fire1.setBounds(910, 330, 340, 200);
 
         animation.setText("anim");
         animation.setBorderPainted(false);
@@ -198,17 +209,21 @@ public class Home extends javax.swing.JFrame {
 
         flare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlareRed.png"))); // NOI18N
         getContentPane().add(flare);
-        flare.setBounds(700, 50, 620, 220);
+        flare.setBounds(518, 98, 660, 160);
 
         FlareBlue1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlareBlue2.png"))); // NOI18N
         getContentPane().add(FlareBlue1);
-        FlareBlue1.setBounds(280, 190, 920, 850);
+        FlareBlue1.setBounds(290, 260, 680, 800);
 
-        bats.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bat_animation.gif"))); // NOI18N
-        getContentPane().add(bats);
-        bats.setBounds(0, 0, 1350, 760);
+        fire2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/littleDragon.gif"))); // NOI18N
+        getContentPane().add(fire2);
+        fire2.setBounds(30, 10, 160, 250);
 
-        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HomeBack.jpg"))); // NOI18N
+        fire3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda99.png"))); // NOI18N
+        getContentPane().add(fire3);
+        fire3.setBounds(800, 110, 220, 260);
+
+        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/homeBack2.jpg"))); // NOI18N
         BackImage.setText("jLabel2");
         getContentPane().add(BackImage);
         BackImage.setBounds(-10, 0, 1390, 770);
@@ -258,6 +273,8 @@ public class Home extends javax.swing.JFrame {
     int wMenu=340;
     int hMenu=440;
     
+    int yDragon=450;
+    
     int xTitle=270;
     int yTitle=-100;
     int wTitle=780;
@@ -285,7 +302,10 @@ public class Home extends javax.swing.JFrame {
             }
             if(yMenu>300){
                 yMenu-=2;
+                yDragon-=2;
                 
+                dashboardDragon.setBounds(dashboardDragon.getX(),yDragon,
+                        dashboardDragon.getWidth(),dashboardDragon.getHeight());
                 menu.setBounds(xMenu, yMenu, wMenu, hMenu);
             }
             
@@ -399,8 +419,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel PlayWorking;
     private javax.swing.JPanel QuitWorking;
     private javax.swing.JButton animation;
-    private javax.swing.JLabel bats;
+    private javax.swing.JLabel dashboardDragon;
     private javax.swing.JLabel fire1;
+    private javax.swing.JLabel fire2;
+    private javax.swing.JLabel fire3;
+    private javax.swing.JLabel fire4;
     private javax.swing.JLabel flare;
     private javax.swing.JLabel menu;
     private javax.swing.JLabel skeleton;
