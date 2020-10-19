@@ -25,7 +25,7 @@
     <Property name="useNullLayout" type="boolean" value="true"/>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="littleDragon">
+    <Component class="javax.swing.JLabel" name="dragon4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="50" style="1"/>
@@ -39,7 +39,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="120" y="-70" width="450" height="270"/>
+          <AbsoluteConstraints x="270" y="10" width="150" height="180"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -73,7 +73,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1020" y="0" width="20" height="50"/>
+          <AbsoluteConstraints x="970" y="30" width="20" height="50"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -90,7 +90,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="440" y="80" width="560" height="90"/>
+          <AbsoluteConstraints x="630" y="70" width="170" height="90"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -465,12 +465,12 @@
     <Component class="javax.swing.JLabel" name="pandaAlive">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Images/panda6.png"/>
+          <Image iconType="3" name="/Images/panda60.png"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1130" y="10" width="230" height="490"/>
+          <AbsoluteConstraints x="1020" y="0" width="180" height="170"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -1055,7 +1055,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="780" y="420" width="530" height="270"/>
+          <AbsoluteConstraints x="780" y="550" width="200" height="130"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -1102,7 +1102,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="fireDragon3">
+    <Component class="javax.swing.JLabel" name="heartsRed">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="50" style="1"/>
@@ -1111,12 +1111,12 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Images/fire9.gif"/>
+          <Image iconType="3" name="/Images/heart3.png"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="1092" y="330" width="190" height="120"/>
+          <AbsoluteConstraints x="1250" y="0" width="120" height="50"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -1186,7 +1186,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="660" y="270" width="360" height="240"/>
+          <AbsoluteConstraints x="640" y="140" width="440" height="240"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -1229,6 +1229,24 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="90" y="290" width="110" height="180"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="fireDragon6">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="50" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Images/fire9.gif"/>
+        </Property>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="1092" y="330" width="190" height="120"/>
         </Constraint>
       </Constraints>
     </Component>

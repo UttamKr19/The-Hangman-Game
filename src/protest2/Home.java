@@ -15,6 +15,9 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         playBGMusic();
+        
+        
+        FlareBlue1.setBounds(290,260,680,800);
         animation.setVisible(false);
         flare.setVisible(false);
         FlareBlue1.setVisible(false);
@@ -24,6 +27,7 @@ public class Home extends javax.swing.JFrame {
     public static boolean bgPlay=false;
     public static AudioStream audioStream;
     public static String gongFile = "src/sounds/bgMusic.wav";
+    
     static void playBGMusic(){
         try{
             
@@ -35,11 +39,10 @@ public class Home extends javax.swing.JFrame {
             }
             //System.out.println(AudioPlayer.player.isAlive());
         }catch(Exception e){
-            System.out.println(e);
+            //System.out.println(e);
             
         }
     }
-    
     public static void alphabetSound(){
         
         try{
@@ -73,21 +76,22 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgPng = new javax.swing.JLabel();
         dashboardDragon = new javax.swing.JLabel();
         menu = new javax.swing.JLabel();
         PlayWorking = new javax.swing.JPanel();
-        CreditsWorking = new javax.swing.JPanel();
+        OptionsWorking = new javax.swing.JPanel();
         QuitWorking = new javax.swing.JPanel();
         HowToPlayWorking = new javax.swing.JPanel();
         title = new javax.swing.JLabel();
-        skeleton = new javax.swing.JLabel();
         fire4 = new javax.swing.JLabel();
         fire1 = new javax.swing.JLabel();
         animation = new javax.swing.JButton();
         flare = new javax.swing.JLabel();
         FlareBlue1 = new javax.swing.JLabel();
         fire2 = new javax.swing.JLabel();
-        fire3 = new javax.swing.JLabel();
+        skeleton = new javax.swing.JLabel();
+        panda = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,6 +101,10 @@ public class Home extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        bgPng.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/homebgpng.png"))); // NOI18N
+        getContentPane().add(bgPng);
+        bgPng.setBounds(1015, 475, 370, 300);
+
         dashboardDragon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/bat_animation.gif"))); // NOI18N
         getContentPane().add(dashboardDragon);
         dashboardDragon.setBounds(360, 180, 390, 320);
@@ -104,7 +112,7 @@ public class Home extends javax.swing.JFrame {
         menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dash3menu.png"))); // NOI18N
         menu.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         getContentPane().add(menu);
-        menu.setBounds(510, 330, 330, 440);
+        menu.setBounds(510, 330, 340, 440);
 
         PlayWorking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PlayWorking.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -126,20 +134,20 @@ public class Home extends javax.swing.JFrame {
         PlayWorking.setBounds(560, 430, 240, 60);
         //jPanel4.setVisible(false);
 
-        CreditsWorking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        CreditsWorking.addMouseListener(new java.awt.event.MouseAdapter() {
+        OptionsWorking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        OptionsWorking.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CreditsWorkingMouseClicked(evt);
+                OptionsWorkingMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                CreditsWorkingMouseEntered(evt);
+                OptionsWorkingMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                CreditsWorkingMouseExited(evt);
+                OptionsWorkingMouseExited(evt);
             }
         });
-        getContentPane().add(CreditsWorking);
-        CreditsWorking.setBounds(560, 600, 240, 50);
+        getContentPane().add(OptionsWorking);
+        OptionsWorking.setBounds(560, 600, 240, 50);
         //jPanel1.setVisible(false);
 
         QuitWorking.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -177,19 +185,15 @@ public class Home extends javax.swing.JFrame {
         title.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/title.png"))); // NOI18N
         title.setText(" ");
         getContentPane().add(title);
-        title.setBounds(270, 30, 780, 220);
+        title.setBounds(270, 30, 440, 220);
 
-        skeleton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birds.gif"))); // NOI18N
-        getContentPane().add(skeleton);
-        skeleton.setBounds(0, 120, 440, 200);
-
-        fire4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon15.gif"))); // NOI18N
+        fire4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon21.gif"))); // NOI18N
         getContentPane().add(fire4);
-        fire4.setBounds(1180, 330, 260, 260);
+        fire4.setBounds(1200, 380, 300, 190);
 
-        fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire12.gif"))); // NOI18N
+        fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire13.gif"))); // NOI18N
         getContentPane().add(fire1);
-        fire1.setBounds(910, 330, 340, 200);
+        fire1.setBounds(1030, 400, 220, 120);
 
         animation.setText("anim");
         animation.setBorderPainted(false);
@@ -209,19 +213,23 @@ public class Home extends javax.swing.JFrame {
 
         flare.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlareRed.png"))); // NOI18N
         getContentPane().add(flare);
-        flare.setBounds(518, 98, 660, 160);
+        flare.setBounds(525, 85, 450, 160);
 
         FlareBlue1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/FlareBlue2.png"))); // NOI18N
         getContentPane().add(FlareBlue1);
-        FlareBlue1.setBounds(290, 260, 680, 800);
+        FlareBlue1.setBounds(430, 600, 530, 150);
 
-        fire2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/littleDragon.gif"))); // NOI18N
+        fire2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon45.gif"))); // NOI18N
         getContentPane().add(fire2);
-        fire2.setBounds(30, 10, 160, 250);
+        fire2.setBounds(20, 410, 170, 120);
 
-        fire3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda99.png"))); // NOI18N
-        getContentPane().add(fire3);
-        fire3.setBounds(800, 110, 220, 260);
+        skeleton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birds.gif"))); // NOI18N
+        getContentPane().add(skeleton);
+        skeleton.setBounds(940, 60, 440, 200);
+
+        panda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda99.png"))); // NOI18N
+        getContentPane().add(panda);
+        panda.setBounds(800, 110, 220, 260);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/homeBack2.jpg"))); // NOI18N
         BackImage.setText("jLabel2");
@@ -259,12 +267,12 @@ public class Home extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_QuitWorkingMouseClicked
 
-    private void CreditsWorkingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreditsWorkingMouseClicked
+    private void OptionsWorkingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsWorkingMouseClicked
         // TODO add your handling code here:
         menuSound();
-        new CreditsWindow(this).show();
+        new OptionsWindow(this).show();
         this.hide();
-    }//GEN-LAST:event_CreditsWorkingMouseClicked
+    }//GEN-LAST:event_OptionsWorkingMouseClicked
     
     Timer timer;
     
@@ -272,16 +280,13 @@ public class Home extends javax.swing.JFrame {
     int yMenu=600;
     int wMenu=340;
     int hMenu=440;
-    
     int yDragon=450;
-    
     int xTitle=270;
     int yTitle=-100;
     int wTitle=780;
     int hTitle=220;
-    
-    
-    
+    int xPanda=900;
+    int yPanda=-150;
     
     private void animationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_animationActionPerformed
 
@@ -290,23 +295,28 @@ public class Home extends javax.swing.JFrame {
       public void actionPerformed(ActionEvent e) {
            PlayWorking.setVisible(false);
            HowToPlayWorking.setVisible(false);
-           CreditsWorking.setVisible(false);
+           OptionsWorking.setVisible(false);
            QuitWorking.setVisible(false);
            
            
-        if(yTitle<30|| yMenu>330){
+        if(yTitle<30|| yMenu>330 || yPanda<110){
             if(yTitle<30){
                 
                 yTitle++;
                 title.setBounds(xTitle, yTitle, wTitle, hTitle);
             }
-            if(yMenu>300){
+            if(yMenu>330){
                 yMenu-=2;
                 yDragon-=2;
                 
                 dashboardDragon.setBounds(dashboardDragon.getX(),yDragon,
                         dashboardDragon.getWidth(),dashboardDragon.getHeight());
                 menu.setBounds(xMenu, yMenu, wMenu, hMenu);
+            }
+            if(yPanda<110){
+                xPanda--;
+                yPanda+=2;
+                panda.setBounds(xPanda,yPanda,220,260);
             }
             
         }
@@ -316,7 +326,7 @@ public class Home extends javax.swing.JFrame {
            yMenu=750;
            PlayWorking.setVisible(true);
            HowToPlayWorking.setVisible(true);
-           CreditsWorking.setVisible(true);
+           OptionsWorking.setVisible(true);
            QuitWorking.setVisible(true);
            flare.setVisible(true);
            FlareBlue1.setVisible(true);
@@ -349,10 +359,10 @@ public class Home extends javax.swing.JFrame {
         menu.setIcon(new javax.swing.ImageIcon("src\\Images\\dash3menu_H2PEnter.png"));
     }//GEN-LAST:event_HowToPlayWorkingMouseEntered
 
-    private void CreditsWorkingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreditsWorkingMouseEntered
+    private void OptionsWorkingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsWorkingMouseEntered
         // TODO add your handling code here:
         menu.setIcon(new javax.swing.ImageIcon("src\\Images\\dash3menu_creditEnter.png"));
-    }//GEN-LAST:event_CreditsWorkingMouseEntered
+    }//GEN-LAST:event_OptionsWorkingMouseEntered
 
     private void PlayWorkingMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayWorkingMouseEntered
         // TODO add your handling code here:
@@ -369,10 +379,10 @@ public class Home extends javax.swing.JFrame {
         menu.setIcon(new javax.swing.ImageIcon("src\\Images\\dash3menu.png"));
     }//GEN-LAST:event_HowToPlayWorkingMouseExited
 
-    private void CreditsWorkingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CreditsWorkingMouseExited
+    private void OptionsWorkingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OptionsWorkingMouseExited
         // TODO add your handling code here:
         menu.setIcon(new javax.swing.ImageIcon("src\\Images\\dash3menu.png"));
-    }//GEN-LAST:event_CreditsWorkingMouseExited
+    }//GEN-LAST:event_OptionsWorkingMouseExited
 
     private void QuitWorkingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_QuitWorkingMouseExited
         // TODO add your handling code here:
@@ -413,19 +423,20 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackImage;
-    private javax.swing.JPanel CreditsWorking;
     private javax.swing.JLabel FlareBlue1;
     private javax.swing.JPanel HowToPlayWorking;
+    private javax.swing.JPanel OptionsWorking;
     private javax.swing.JPanel PlayWorking;
     private javax.swing.JPanel QuitWorking;
     private javax.swing.JButton animation;
+    private javax.swing.JLabel bgPng;
     private javax.swing.JLabel dashboardDragon;
     private javax.swing.JLabel fire1;
     private javax.swing.JLabel fire2;
-    private javax.swing.JLabel fire3;
     private javax.swing.JLabel fire4;
     private javax.swing.JLabel flare;
     private javax.swing.JLabel menu;
+    private javax.swing.JLabel panda;
     private javax.swing.JLabel skeleton;
     private javax.swing.JLabel title;
     // End of variables declaration//GEN-END:variables

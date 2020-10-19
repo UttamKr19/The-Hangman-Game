@@ -1,26 +1,18 @@
-
 package protest2;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import static protest2.Home.audioStream;
-import static protest2.Home.gongFile;
-import static protest2.MediumGame.heartLives;
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
 
-/**
- *
- * @author Uttam
- */
 public class HardGame extends javax.swing.JFrame {
 
     public static int score=0;
@@ -50,7 +42,7 @@ public class HardGame extends javax.swing.JFrame {
     public HardGame(Home home,MediumGame med,int heart,int sco) {
         homeRef=home;
         mediumRef=med;
-        heartLives=1;
+        heartLives=heart;
         this.score=score;
         initComponents();
         setWordsFromFile();
@@ -64,7 +56,7 @@ public class HardGame extends javax.swing.JFrame {
         int ch;
         try{
            
-           FileReader fr=new FileReader("src\\data\\words.txt");
+           FileReader fr=new FileReader("src\\data\\hardWords.txt");
            while ((ch=fr.read())!=-1){
                t=t+(""+(char)ch);
            }
@@ -72,7 +64,6 @@ public class HardGame extends javax.swing.JFrame {
            str=st;
            
         }catch(Exception e){
-            System.out.println("dfsf");
             setWords();
         }
     }
@@ -258,8 +249,7 @@ public class HardGame extends javax.swing.JFrame {
             InputStream in = new FileInputStream(gongFile);
             audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
-        }catch(Exception e){
-            System.out.println(e);
+        }catch(IOException e){
             
         }
     }
@@ -272,37 +262,57 @@ public class HardGame extends javax.swing.JFrame {
     
     public void setInitialElements(){
             BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\hardBack.jpg"));
+            lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
             
             xPanda=230;
             xMonster=-480;
-            yMonster=0;
-            //hMonster=
-            //xMonster2=-30;
-            pandaRun.setBounds(xPanda, pandaRun.getY(), pandaRun.getWidth(),pandaRun.getHeight());
-            dragon2.setBounds(xMonster, yMonster, 440, 440);
-            wordspace.setBounds(780,100,wordspace.getWidth(),wordspace.getHeight());
-            //monster2.setBounds(xMonster2, monster2.getY(), monster2.getWidth(), monster2.getHeight());
+            xZombie1=0;
+            xZombie2=-10;
+            yMonster=-10;
+            xGroundMonster=-500;
             
-            pandaRun.setVisible(true);
-            pandaDead.setVisible(false);
-
-            timerResetButton.doClick();
+            chances=6;
+            
+            pandaRun.setBounds(xPanda, 530, 160,110);
+            dragon2.setBounds(xMonster, yMonster, 440, 440);
+            wordspace.setBounds(780,80,490,90);
+            treeBG.setBounds(0,0,830,480);
+            groundMonster.setBounds(-500,400,180,250);
+            
             clockText.setForeground(Color.WHITE);
-            ProgressBar.setValue(100);
             ProgressBar.setForeground(Color.green);
             wordspace.setForeground(Color.white);
-            chances=6;
-            chancesValue.setText(String.valueOf(chances));
-            chancesValue.setVisible(false);
-            lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
-            //pandaRun.setVisible(true);
-            dragon2.setVisible(true);
-            //music.doClick();
             
-            if(heartLives<=1)
-            Another.setEnabled(false);
-
-
+            pandaRun.setVisible(true);
+            chancesValue.setVisible(false);
+            clockText.setVisible(false);
+            
+            groundMonster.setVisible(true);
+            zombie1.setVisible(true);
+            zombie2.setVisible(true);
+            dragon2.setVisible(true);
+            dragon33.setVisible(true);
+            
+            switch (heartLives) {
+                case 3:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart3.png"));
+                    break;
+                case 2:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart2.png"));
+                    break;
+                case 1:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart1.png"));
+                    Another.setEnabled(false);
+                    break;
+                default:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart0.png"));
+                    Another.setEnabled(false);
+                    break;
+            }
+            ProgressBar.setValue(100);
+            
+            chancesValue.setText(String.valueOf(chances));
+            
             int r=0;
             do{
                 r=(int)(Math.random() * (str.length-1));
@@ -319,25 +329,20 @@ public class HardGame extends javax.swing.JFrame {
                         wordspace.getWidth(), wordspace.getHeight());
                 compLen-=3;
             }
-            
-
-            
 
             temp="";
-            hint="";
-            
-            
-            //mediumInitials
+
             temp=temp+word.charAt(0);
             for(int i=0;i<len-1;i++)
                 temp=temp+"-";
-            //temp=temp+word.charAt(word.length()-1);
             
             ch=temp.toCharArray();
             
             wordspace.setText(temp);
 
             show=temp;
+            
+            timerResetButton.doClick();
     }
     
     void changeValue(){
@@ -365,32 +370,25 @@ public class HardGame extends javax.swing.JFrame {
         
         switch (chances) {
             case 6:
-                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
-                //ProgressBar.setValue(100);
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
                 break;
             case 5:
-                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda50.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live5.png"));
                 ProgressBar.setForeground(Color.yellow);
                 break;
             case 4:
-                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda40.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live4.png"));
                 ProgressBar.setForeground(Color.yellow);
                 break;
             case 3:
-                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda30.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live3.png"));
                 ProgressBar.setForeground(Color.orange);
                 break;
             case 2:
-                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda20.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live2.png"));
                 ProgressBar.setForeground(Color.orange);
                 break;
             case 1:
-                //pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda10.png"));
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live1.png"));
                 ProgressBar.setForeground(Color.red);
                 break;
@@ -405,34 +403,19 @@ public class HardGame extends javax.swing.JFrame {
         
         if(chances<1 && !word.equals(show)){
             
-        playWinLoseSound();
-        ProgressBar.setValue(0);
-        pandaDead.setVisible(true);
-        
-        //pandaAlive.setVisible(false);
-        //BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
-        
-        
-        LoseReason="ZeroGuesses";
-        timerReset();
-            
-        revealWord("lose");
-        loseWindow();
-            
-            
+            playWinLoseSound();
+            ProgressBar.setValue(0);
+            LoseReason="ZeroGuesses";
+            timerReset();
+            revealWord("lose");
+            loseWindow();
         }
         else if(word.equals(show)){
             playWinLoseSound();
             revealWord("win");
-            //pandaAlive.setVisible(false);
             timerReset();
-            //fire.setVisible(false);
-            //fire1.setVisible(false);
-            //BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
-            
             new WinDialogHard(this,this,true).show();
         }
-        
         
     }
     
@@ -447,83 +430,83 @@ public class HardGame extends javax.swing.JFrame {
     }
     
     public void setAlphabets(){
-        D.setBackground(new java.awt.Color(25, 0, 0));
+        D.setBackground(new java.awt.Color(12, 0, 0));
         D.setVisible(true);
         
-        M.setBackground(new java.awt.Color(25, 0, 0));
+        M.setBackground(new java.awt.Color(12, 0, 0));
         M.setVisible(true);
         
-        V.setBackground(new java.awt.Color(25, 0, 0));
+        V.setBackground(new java.awt.Color(12, 0, 0));
         V.setVisible(true);
         
-        A.setBackground(new java.awt.Color(25, 0, 0));
+        A.setBackground(new java.awt.Color(12, 0, 0));
         A.setVisible(true);
         
-        J.setBackground(new java.awt.Color(25, 0, 0));
+        J.setBackground(new java.awt.Color(12, 0, 0));
         J.setVisible(true);
         
-        S.setBackground(new java.awt.Color(25, 0, 0));
+        S.setBackground(new java.awt.Color(12, 0, 0));
         S.setVisible(true);
         
-        U.setBackground(new java.awt.Color(25, 0, 0));
+        U.setBackground(new java.awt.Color(12, 0, 0));
         U.setVisible(true);
         
-        L.setBackground(new java.awt.Color(25, 0, 0));
+        L.setBackground(new java.awt.Color(12, 0, 0));
         L.setVisible(true);
         
-        C.setBackground(new java.awt.Color(25, 0, 0));
+        C.setBackground(new java.awt.Color(12, 0, 0));
         C.setVisible(true);
         
-        B.setBackground(new java.awt.Color(25, 0, 0));
+        B.setBackground(new java.awt.Color(12, 0, 0));
         B.setVisible(true);
         
-        K.setBackground(new java.awt.Color(25, 0, 0));
+        K.setBackground(new java.awt.Color(12, 0, 0));
         K.setVisible(true);
         
-        T.setBackground(new java.awt.Color(25, 0, 0));
+        T.setBackground(new java.awt.Color(12, 0, 0));
         T.setVisible(true);
         
-        X.setBackground(new java.awt.Color(25, 0, 0));
+        X.setBackground(new java.awt.Color(12, 0, 0));
         X.setVisible(true);
         
-        O.setBackground(new java.awt.Color(25, 0, 0));
+        O.setBackground(new java.awt.Color(12, 0, 0));
         O.setVisible(true);
         
-        F.setBackground(new java.awt.Color(25, 0, 0));
+        F.setBackground(new java.awt.Color(12, 0, 0));
         F.setVisible(true);
         
-        G.setBackground(new java.awt.Color(25, 0, 0));
+        G.setBackground(new java.awt.Color(12, 0, 0));
         G.setVisible(true);
         
-        E.setBackground(new java.awt.Color(25, 0, 0));
+        E.setBackground(new java.awt.Color(12, 0, 0));
         E.setVisible(true);
         
-        N.setBackground(new java.awt.Color(25, 0, 0));
+        N.setBackground(new java.awt.Color(12, 0, 0));
         N.setVisible(true);
         
-        W.setBackground(new java.awt.Color(25, 0, 0));
+        W.setBackground(new java.awt.Color(12, 0, 0));
         W.setVisible(true);
         
-        P.setBackground(new java.awt.Color(25, 0, 0));
+        P.setBackground(new java.awt.Color(12, 0, 0));
         P.setVisible(true);
         
-        Y.setBackground(new java.awt.Color(25, 0, 0));
+        Y.setBackground(new java.awt.Color(12, 0, 0));
         Y.setVisible(true);
         
-        R.setBackground(new java.awt.Color(25, 0, 0));
+        R.setBackground(new java.awt.Color(12, 0, 0));
         R.setVisible(true);
         
         
-        Z.setBackground(new java.awt.Color(25, 0, 0));
+        Z.setBackground(new java.awt.Color(12, 0, 0));
         Z.setVisible(true);
         
-        Q.setBackground(new java.awt.Color(25, 0, 0));
+        Q.setBackground(new java.awt.Color(12, 0, 0));
         Q.setVisible(true);
         
-        H.setBackground(new java.awt.Color(25, 0, 0));
+        H.setBackground(new java.awt.Color(12, 0, 0));
         H.setVisible(true);
         
-        I.setBackground(new java.awt.Color(25, 0, 0));
+        I.setBackground(new java.awt.Color(12, 0, 0));
         I.setVisible(true);
     }
     
@@ -540,8 +523,7 @@ public class HardGame extends javax.swing.JFrame {
             AudioStream audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
             
-        }catch(Exception e){
-            //System.out.println(e);
+        }catch(IOException e){
             
         }
         
@@ -555,14 +537,22 @@ public class HardGame extends javax.swing.JFrame {
             AudioStream audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
             
-        }catch(Exception e){
-            //System.out.println(e);
+        }catch(IOException e){
             
         }
         
     }
     
     void loseWindow(){
+       heartLives--;
+       heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart0.png"));
+       
+       groundMonster.setVisible(false);
+       zombie1.setVisible(false);
+       zombie2.setVisible(false);
+       dragon2.setVisible(false);
+       dragon33.setVisible(false);
+       pandaRun.setVisible(false);
        new LoseDialogHard(this,this,true,LoseReason,heartLives,score).show();
     }
        
@@ -582,6 +572,8 @@ public class HardGame extends javax.swing.JFrame {
         Another = new javax.swing.JButton();
         wordspace = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
+        zombie1 = new javax.swing.JLabel();
+        groundMonster = new javax.swing.JLabel();
         treeBG = new javax.swing.JLabel();
         lives = new javax.swing.JLabel();
         chancesValue = new javax.swing.JLabel();
@@ -615,20 +607,22 @@ public class HardGame extends javax.swing.JFrame {
         pandaRun1 = new javax.swing.JLabel();
         ProgressBar = new javax.swing.JProgressBar();
         pandaRun = new javax.swing.JLabel();
-        pandaDead = new javax.swing.JLabel();
-        fire1 = new javax.swing.JLabel();
-        monster3 = new javax.swing.JLabel();
         L = new javax.swing.JButton();
         bird1 = new javax.swing.JLabel();
+        dragon33 = new javax.swing.JLabel();
+        dragon98 = new javax.swing.JLabel();
+        skeleton = new javax.swing.JLabel();
+        heartsRed = new javax.swing.JLabel();
+        zombie2 = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        dragon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/monster1.gif"))); // NOI18N
+        dragon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon46.gif"))); // NOI18N
         dragon2.setText(" ");
         getContentPane().add(dragon2);
-        dragon2.setBounds(710, 490, 310, 90);
+        dragon2.setBounds(270, 440, 210, 190);
 
         music.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/musicPlay.png"))); // NOI18N
         music.setToolTipText("Play/Stop Backgroud Music");
@@ -668,10 +662,11 @@ public class HardGame extends javax.swing.JFrame {
 
         wordspace.setBackground(new java.awt.Color(102, 0, 0));
         wordspace.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
+        wordspace.setForeground(new java.awt.Color(255, 255, 255));
         wordspace.setText("ABCD");
         wordspace.setName(""); // NOI18N
         getContentPane().add(wordspace);
-        wordspace.setBounds(780, 80, 490, 90);
+        wordspace.setBounds(780, 70, 170, 90);
 
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/backbutt.png"))); // NOI18N
         backButton.setText("Back");
@@ -692,12 +687,22 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(backButton);
         backButton.setBounds(-100, 20, 290, 60);
 
+        zombie1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/zombie2.gif"))); // NOI18N
+        zombie1.setText(" ");
+        getContentPane().add(zombie1);
+        zombie1.setBounds(10, 580, 100, 100);
+
+        groundMonster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/monster34.gif"))); // NOI18N
+        groundMonster.setText(" ");
+        getContentPane().add(groundMonster);
+        groundMonster.setBounds(90, 430, 160, 210);
+
         treeBG.setBackground(new java.awt.Color(102, 0, 0));
         treeBG.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
         treeBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/trees.png"))); // NOI18N
         treeBG.setName(""); // NOI18N
         getContentPane().add(treeBG);
-        treeBG.setBounds(0, 0, 830, 480);
+        treeBG.setBounds(0, 0, 150, 480);
 
         lives.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         lives.setForeground(new java.awt.Color(51, 0, 0));
@@ -709,13 +714,13 @@ public class HardGame extends javax.swing.JFrame {
         chancesValue.setForeground(new java.awt.Color(255, 255, 255));
         chancesValue.setText("8");
         getContentPane().add(chancesValue);
-        chancesValue.setBounds(1300, 0, 20, 50);
+        chancesValue.setBounds(780, 210, 20, 50);
 
-        A.setBackground(new java.awt.Color(25, 0, 0));
+        A.setBackground(new java.awt.Color(10, 0, 0));
         A.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         A.setForeground(new java.awt.Color(255, 255, 255));
         A.setText("A");
-        A.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        A.setBorder(null);
         A.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         A.setFocusPainted(false);
         A.setFocusable(false);
@@ -727,7 +732,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(A);
         A.setBounds(540, 300, 50, 50);
 
-        B.setBackground(new java.awt.Color(25, 0, 0));
+        B.setBackground(new java.awt.Color(10, 0, 0));
         B.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         B.setForeground(new java.awt.Color(255, 255, 255));
         B.setText("B");
@@ -743,7 +748,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(B);
         B.setBounds(80, 210, 50, 50);
 
-        C.setBackground(new java.awt.Color(25, 0, 0));
+        C.setBackground(new java.awt.Color(10, 0, 0));
         C.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         C.setForeground(new java.awt.Color(255, 255, 255));
         C.setText("C");
@@ -759,7 +764,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(C);
         C.setBounds(120, 190, 50, 50);
 
-        D.setBackground(new java.awt.Color(25, 0, 0));
+        D.setBackground(new java.awt.Color(10, 0, 0));
         D.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         D.setForeground(new java.awt.Color(255, 255, 255));
         D.setText("D");
@@ -775,7 +780,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(D);
         D.setBounds(10, 270, 50, 50);
 
-        Z.setBackground(new java.awt.Color(25, 0, 0));
+        Z.setBackground(new java.awt.Color(10, 0, 0));
         Z.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         Z.setForeground(new java.awt.Color(255, 255, 255));
         Z.setText("Z");
@@ -791,7 +796,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(Z);
         Z.setBounds(400, 120, 50, 50);
 
-        E.setBackground(new java.awt.Color(25, 0, 0));
+        E.setBackground(new java.awt.Color(10, 0, 0));
         E.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         E.setForeground(new java.awt.Color(255, 255, 255));
         E.setText("E");
@@ -807,11 +812,11 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(E);
         E.setBounds(330, 250, 50, 50);
 
-        F.setBackground(new java.awt.Color(25, 0, 0));
+        F.setBackground(new java.awt.Color(10, 0, 0));
         F.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         F.setForeground(new java.awt.Color(255, 255, 255));
         F.setText("F");
-        F.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        F.setBorder(null);
         F.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         F.setFocusPainted(false);
         F.setFocusable(false);
@@ -823,7 +828,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(F);
         F.setBounds(630, 190, 50, 50);
 
-        G.setBackground(new java.awt.Color(25, 0, 0));
+        G.setBackground(new java.awt.Color(10, 0, 0));
         G.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         G.setForeground(new java.awt.Color(255, 255, 255));
         G.setText("G");
@@ -839,7 +844,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(G);
         G.setBounds(100, 250, 50, 50);
 
-        H.setBackground(new java.awt.Color(25, 0, 0));
+        H.setBackground(new java.awt.Color(10, 0, 0));
         H.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         H.setForeground(new java.awt.Color(255, 255, 255));
         H.setText("H");
@@ -855,7 +860,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(H);
         H.setBounds(320, 310, 50, 50);
 
-        I.setBackground(new java.awt.Color(25, 0, 0));
+        I.setBackground(new java.awt.Color(10, 0, 0));
         I.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         I.setForeground(new java.awt.Color(255, 255, 255));
         I.setText("I");
@@ -871,11 +876,11 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(I);
         I.setBounds(370, 360, 50, 50);
 
-        J.setBackground(new java.awt.Color(25, 0, 0));
+        J.setBackground(new java.awt.Color(10, 0, 0));
         J.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         J.setForeground(new java.awt.Color(255, 255, 255));
         J.setText("J");
-        J.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        J.setBorder(null);
         J.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         J.setFocusPainted(false);
         J.setFocusable(false);
@@ -887,11 +892,11 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(J);
         J.setBounds(600, 360, 50, 50);
 
-        M.setBackground(new java.awt.Color(25, 0, 0));
+        M.setBackground(new java.awt.Color(10, 0, 0));
         M.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         M.setForeground(new java.awt.Color(255, 255, 255));
         M.setText("M");
-        M.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        M.setBorder(null);
         M.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         M.setFocusPainted(false);
         M.setFocusable(false);
@@ -903,7 +908,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(M);
         M.setBounds(650, 130, 50, 50);
 
-        K.setBackground(new java.awt.Color(25, 0, 0));
+        K.setBackground(new java.awt.Color(10, 0, 0));
         K.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         K.setForeground(new java.awt.Color(255, 255, 255));
         K.setText("K");
@@ -919,11 +924,11 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(K);
         K.setBounds(0, 220, 50, 50);
 
-        N.setBackground(new java.awt.Color(25, 0, 0));
+        N.setBackground(new java.awt.Color(10, 0, 0));
         N.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         N.setForeground(new java.awt.Color(255, 255, 255));
         N.setText("N");
-        N.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        N.setBorder(null);
         N.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         N.setFocusPainted(false);
         N.setFocusable(false);
@@ -935,7 +940,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(N);
         N.setBounds(550, 350, 50, 50);
 
-        T.setBackground(new java.awt.Color(25, 0, 0));
+        T.setBackground(new java.awt.Color(10, 0, 0));
         T.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         T.setForeground(new java.awt.Color(255, 255, 255));
         T.setText("T");
@@ -951,7 +956,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(T);
         T.setBounds(300, 190, 50, 50);
 
-        S.setBackground(new java.awt.Color(25, 0, 0));
+        S.setBackground(new java.awt.Color(10, 0, 0));
         S.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         S.setForeground(new java.awt.Color(255, 255, 255));
         S.setText("S");
@@ -967,7 +972,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(S);
         S.setBounds(500, 30, 50, 50);
 
-        O.setBackground(new java.awt.Color(25, 0, 0));
+        O.setBackground(new java.awt.Color(10, 0, 0));
         O.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         O.setForeground(new java.awt.Color(255, 255, 255));
         O.setText("O");
@@ -983,7 +988,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(O);
         O.setBounds(440, 200, 50, 50);
 
-        U.setBackground(new java.awt.Color(25, 0, 0));
+        U.setBackground(new java.awt.Color(10, 0, 0));
         U.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         U.setForeground(new java.awt.Color(255, 255, 255));
         U.setText("U");
@@ -999,11 +1004,11 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(U);
         U.setBounds(90, 300, 50, 50);
 
-        R.setBackground(new java.awt.Color(25, 0, 0));
+        R.setBackground(new java.awt.Color(10, 0, 0));
         R.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         R.setForeground(new java.awt.Color(255, 255, 255));
         R.setText("R");
-        R.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        R.setBorder(null);
         R.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         R.setFocusPainted(false);
         R.setFocusable(false);
@@ -1015,7 +1020,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(R);
         R.setBounds(660, 80, 50, 50);
 
-        Q.setBackground(new java.awt.Color(25, 0, 0));
+        Q.setBackground(new java.awt.Color(10, 0, 0));
         Q.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         Q.setForeground(new java.awt.Color(255, 255, 255));
         Q.setText("Q");
@@ -1031,7 +1036,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(Q);
         Q.setBounds(320, 140, 50, 50);
 
-        P.setBackground(new java.awt.Color(25, 0, 0));
+        P.setBackground(new java.awt.Color(10, 0, 0));
         P.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         P.setForeground(new java.awt.Color(255, 255, 255));
         P.setText("P");
@@ -1047,11 +1052,11 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(P);
         P.setBounds(320, 370, 50, 50);
 
-        V.setBackground(new java.awt.Color(25, 0, 0));
+        V.setBackground(new java.awt.Color(10, 0, 0));
         V.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         V.setForeground(new java.awt.Color(255, 255, 255));
         V.setText("V");
-        V.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        V.setBorder(null);
         V.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         V.setFocusPainted(false);
         V.setFocusable(false);
@@ -1063,7 +1068,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(V);
         V.setBounds(660, 20, 50, 50);
 
-        W.setBackground(new java.awt.Color(25, 0, 0));
+        W.setBackground(new java.awt.Color(10, 0, 0));
         W.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         W.setForeground(new java.awt.Color(255, 255, 255));
         W.setText("W");
@@ -1079,7 +1084,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(W);
         W.setBounds(350, 60, 50, 50);
 
-        X.setBackground(new java.awt.Color(25, 0, 0));
+        X.setBackground(new java.awt.Color(10, 0, 0));
         X.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         X.setForeground(new java.awt.Color(255, 255, 255));
         X.setText("X");
@@ -1095,7 +1100,7 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(X);
         X.setBounds(350, 200, 50, 50);
 
-        Y.setBackground(new java.awt.Color(25, 0, 0));
+        Y.setBackground(new java.awt.Color(10, 0, 0));
         Y.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         Y.setForeground(new java.awt.Color(255, 255, 255));
         Y.setText("Y");
@@ -1125,7 +1130,7 @@ public class HardGame extends javax.swing.JFrame {
         clockText.setForeground(new java.awt.Color(255, 255, 255));
         clockText.setText("45");
         getContentPane().add(clockText);
-        clockText.setBounds(1250, 5, 40, 30);
+        clockText.setBounds(790, 180, 40, 30);
 
         pandaRun1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon13.gif"))); // NOI18N
         pandaRun1.setText(" ");
@@ -1144,24 +1149,9 @@ public class HardGame extends javax.swing.JFrame {
         pandaRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pandaRunning.gif"))); // NOI18N
         pandaRun.setText(" ");
         getContentPane().add(pandaRun);
-        pandaRun.setBounds(580, 530, 160, 110);
+        pandaRun.setBounds(580, 530, 100, 110);
 
-        pandaDead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda0.png"))); // NOI18N
-        pandaDead.setText(" ");
-        getContentPane().add(pandaDead);
-        pandaDead.setBounds(1050, 530, 290, 120);
-
-        fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire9.gif"))); // NOI18N
-        fire1.setText(" ");
-        getContentPane().add(fire1);
-        fire1.setBounds(820, 200, 170, 140);
-
-        monster3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon15.gif"))); // NOI18N
-        monster3.setText(" ");
-        getContentPane().add(monster3);
-        monster3.setBounds(870, 340, 330, 180);
-
-        L.setBackground(new java.awt.Color(25, 0, 0));
+        L.setBackground(new java.awt.Color(10, 0, 0));
         L.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         L.setForeground(new java.awt.Color(255, 255, 255));
         L.setText("L");
@@ -1182,7 +1172,32 @@ public class HardGame extends javax.swing.JFrame {
         bird1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birds2.gif"))); // NOI18N
         bird1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         getContentPane().add(bird1);
-        bird1.setBounds(940, 210, 180, 120);
+        bird1.setBounds(960, 230, 180, 120);
+
+        dragon33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon29.gif"))); // NOI18N
+        getContentPane().add(dragon33);
+        dragon33.setBounds(1190, 80, 140, 190);
+
+        dragon98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon23.gif"))); // NOI18N
+        dragon98.setText(" ");
+        getContentPane().add(dragon98);
+        dragon98.setBounds(290, 330, 170, 100);
+
+        skeleton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/skeleton3.gif"))); // NOI18N
+        skeleton.setText(" ");
+        getContentPane().add(skeleton);
+        skeleton.setBounds(1030, 228, 50, 170);
+
+        heartsRed.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        heartsRed.setForeground(new java.awt.Color(255, 255, 255));
+        heartsRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/heart3.png"))); // NOI18N
+        getContentPane().add(heartsRed);
+        heartsRed.setBounds(1250, 0, 120, 50);
+
+        zombie2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/zombie3.gif"))); // NOI18N
+        zombie2.setText(" ");
+        getContentPane().add(zombie2);
+        zombie2.setBounds(30, 470, 100, 100);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/hardBack.jpg"))); // NOI18N
         BackImage.setText(".");
@@ -1492,10 +1507,10 @@ public class HardGame extends javax.swing.JFrame {
     int ySoul=430;
     int xMonster=-100;
     int yMonster=280;
-    //int xMonster2=0;
+    int xZombie1=0;
+    int xZombie2=0;
+    int xGroundMonster=-500;
     
-    
-    //static int fff=0;
     private void timerResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerResetButtonActionPerformed
         
         time=359;
@@ -1526,22 +1541,17 @@ public class HardGame extends javax.swing.JFrame {
             if(timeText<20){
                 xPanda++;
             }
+            xZombie1+=1;
+            xZombie2+=2;
             xPanda+=2;
-//            xMonster2+=2;
-//            if(timeText%4==0)
-//                xMonster2++;
-//            
+            xGroundMonster+=3;
             
             pandaRun.setBounds(xPanda, pandaRun.getY(), pandaRun.getWidth(),pandaRun.getHeight());
             dragon2.setBounds(xMonster, yMonster, dragon2.getWidth(), dragon2.getHeight());
-//            monster3.setBounds(monster3.getX()-4, monster3.getY(), monster3.getWidth(), monster3.getHeight());
-
-//            if(timeText%2==0)
-//                dragon4.setBounds(dragon4.getX()-1, dragon4.getY()+1, dragon4.getWidth(), dragon4.getHeight());
-//            if(timeText<20)
-//                dragon4.setIcon(new javax.swing.ImageIcon("src\\Images\\dragon14_2.gif"));
-
-//monster2.setBounds(xMonster2, monster2.getY(), monster2.getWidth(), monster2.getHeight());
+            zombie1.setBounds(xZombie1, zombie1.getY(), zombie1.getWidth(), zombie1.getHeight());
+            zombie2.setBounds(xZombie2, zombie2.getY(), zombie2.getWidth(), zombie2.getHeight());
+            groundMonster.setBounds(xGroundMonster, groundMonster.getY(), groundMonster.getWidth(), groundMonster.getHeight());
+            
             
             if(timeText<10){
                 clockText.setText(" "+Integer.toString(timeText));
@@ -1561,9 +1571,7 @@ public class HardGame extends javax.swing.JFrame {
             timerReset();
             LoseReason="Timeout";
             ProgressBar.setValue(0);
-            //BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
-            //pandaAlive.setVisible(false);
-            pandaDead.setVisible(true);
+            
             revealWord("lose");
             loseWindow();
         }
@@ -1591,7 +1599,7 @@ public class HardGame extends javax.swing.JFrame {
                 music.setIcon(new javax.swing.ImageIcon("src\\Images\\musicMute.png"));
             }
             else{
-                System.out.println("dd");
+                //System.out.println("dd");
                 InputStream in = new FileInputStream(homeRef.gongFile);
                 homeRef.audioStream = new AudioStream(in);
                 AudioPlayer.player.start(homeRef.audioStream);
@@ -1702,15 +1710,19 @@ public class HardGame extends javax.swing.JFrame {
     private javax.swing.JLabel chancesValue;
     private javax.swing.JLabel clockText;
     private javax.swing.JLabel dragon2;
-    private javax.swing.JLabel fire1;
+    private javax.swing.JLabel dragon33;
+    private javax.swing.JLabel dragon98;
+    private javax.swing.JLabel groundMonster;
+    private javax.swing.JLabel heartsRed;
     private javax.swing.JLabel lives;
-    private javax.swing.JLabel monster3;
     private javax.swing.JButton music;
-    private javax.swing.JLabel pandaDead;
     private javax.swing.JLabel pandaRun;
     private javax.swing.JLabel pandaRun1;
+    private javax.swing.JLabel skeleton;
     private javax.swing.JButton timerResetButton;
     private javax.swing.JLabel treeBG;
     private javax.swing.JLabel wordspace;
+    private javax.swing.JLabel zombie1;
+    private javax.swing.JLabel zombie2;
     // End of variables declaration//GEN-END:variables
 }
