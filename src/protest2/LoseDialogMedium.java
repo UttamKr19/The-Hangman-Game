@@ -1,9 +1,6 @@
-
 package protest2;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -134,15 +131,19 @@ public class LoseDialogMedium extends javax.swing.JDialog {
     private void initComponents() {
 
         playAgainButton = new javax.swing.JButton();
-        quitButton = new javax.swing.JButton();
-        ReasonText = new javax.swing.JTextField();
         pandaCry = new javax.swing.JLabel();
+        quitButton = new javax.swing.JButton();
+        pandaCry1 = new javax.swing.JLabel();
+        ReasonText = new javax.swing.JTextField();
         BackImage = new javax.swing.JLabel();
 
         setBounds(new java.awt.Rectangle(350, 250, 600, 450));
         setLocation(new java.awt.Point(350, 200));
-        setMinimumSize(new java.awt.Dimension(640, 430));
+        setMaximumSize(new java.awt.Dimension(720, 440));
+        setMinimumSize(new java.awt.Dimension(720, 440));
+        setPreferredSize(new java.awt.Dimension(720, 440));
         setResizable(false);
+        setSize(new java.awt.Dimension(720, 440));
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -160,8 +161,12 @@ public class LoseDialogMedium extends javax.swing.JDialog {
             }
         });
         getContentPane().add(playAgainButton);
-        playAgainButton.setBounds(20, 300, 160, 70);
+        playAgainButton.setBounds(10, 330, 160, 70);
         getRootPane().setDefaultButton(playAgainButton);
+
+        pandaCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/deadPanda2.png"))); // NOI18N
+        getContentPane().add(pandaCry);
+        pandaCry.setBounds(350, 220, 170, 180);
 
         quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseQuit.png"))); // NOI18N
         quitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -172,7 +177,11 @@ public class LoseDialogMedium extends javax.swing.JDialog {
             }
         });
         getContentPane().add(quitButton);
-        quitButton.setBounds(470, 300, 160, 70);
+        quitButton.setBounds(550, 330, 160, 70);
+
+        pandaCry1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/knight2.gif"))); // NOI18N
+        getContentPane().add(pandaCry1);
+        pandaCry1.setBounds(180, 140, 200, 270);
 
         ReasonText.setEditable(false);
         ReasonText.setBackground(new java.awt.Color(140, 0, 0));
@@ -186,17 +195,13 @@ public class LoseDialogMedium extends javax.swing.JDialog {
             }
         });
         getContentPane().add(ReasonText);
-        ReasonText.setBounds(0, 160, 650, 60);
-
-        pandaCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sad (2).gif"))); // NOI18N
-        getContentPane().add(pandaCry);
-        pandaCry.setBounds(160, 80, 330, 400);
+        ReasonText.setBounds(0, 130, 720, 50);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseDialog.png"))); // NOI18N
         BackImage.setMaximumSize(new java.awt.Dimension(700, 450));
         BackImage.setMinimumSize(new java.awt.Dimension(700, 450));
         getContentPane().add(BackImage);
-        BackImage.setBounds(0, 0, 652, 401);
+        BackImage.setBounds(0, 0, 720, 413);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -296,6 +301,7 @@ public class LoseDialogMedium extends javax.swing.JDialog {
     private javax.swing.JLabel BackImage;
     private javax.swing.JTextField ReasonText;
     private javax.swing.JLabel pandaCry;
+    private javax.swing.JLabel pandaCry1;
     private javax.swing.JButton playAgainButton;
     private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables

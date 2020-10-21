@@ -119,8 +119,11 @@ public class WinDialogHard extends javax.swing.JDialog {
 
         setBounds(new java.awt.Rectangle(350, 250, 650, 400));
         setLocation(new java.awt.Point(350, 200));
-        setMinimumSize(new java.awt.Dimension(650, 400));
+        setMaximumSize(new java.awt.Dimension(708, 470));
+        setMinimumSize(new java.awt.Dimension(708, 470));
+        setPreferredSize(new java.awt.Dimension(708, 470));
         setResizable(false);
+        setSize(new java.awt.Dimension(708, 470));
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -138,7 +141,7 @@ public class WinDialogHard extends javax.swing.JDialog {
             }
         });
         getContentPane().add(okButton);
-        okButton.setBounds(40, 310, 160, 60);
+        okButton.setBounds(30, 360, 160, 60);
         getRootPane().setDefaultButton(okButton);
 
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseQuit.png"))); // NOI18N
@@ -150,15 +153,15 @@ public class WinDialogHard extends javax.swing.JDialog {
             }
         });
         getContentPane().add(cancelButton);
-        cancelButton.setBounds(450, 310, 160, 60);
+        cancelButton.setBounds(520, 360, 160, 60);
 
         pandaHappy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dance.gif"))); // NOI18N
         getContentPane().add(pandaHappy);
-        pandaHappy.setBounds(130, 130, 320, 290);
+        pandaHappy.setBounds(160, 170, 320, 290);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WinDialog.png"))); // NOI18N
         getContentPane().add(BackImage);
-        BackImage.setBounds(0, 0, 652, 400);
+        BackImage.setBounds(0, 0, 710, 470);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

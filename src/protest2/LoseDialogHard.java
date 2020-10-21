@@ -133,14 +133,17 @@ public class LoseDialogHard extends javax.swing.JDialog {
 
         playAgainButton = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
-        ReasonText = new javax.swing.JTextField();
         pandaCry = new javax.swing.JLabel();
+        ReasonText = new javax.swing.JTextField();
         BackImage = new javax.swing.JLabel();
 
         setBounds(new java.awt.Rectangle(350, 250, 600, 450));
         setLocation(new java.awt.Point(350, 200));
-        setMinimumSize(new java.awt.Dimension(640, 430));
+        setMaximumSize(new java.awt.Dimension(720, 440));
+        setMinimumSize(new java.awt.Dimension(720, 440));
+        setPreferredSize(new java.awt.Dimension(720, 440));
         setResizable(false);
+        setSize(new java.awt.Dimension(720, 440));
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -158,7 +161,7 @@ public class LoseDialogHard extends javax.swing.JDialog {
             }
         });
         getContentPane().add(playAgainButton);
-        playAgainButton.setBounds(20, 300, 160, 70);
+        playAgainButton.setBounds(10, 320, 160, 70);
         getRootPane().setDefaultButton(playAgainButton);
 
         quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseQuit.png"))); // NOI18N
@@ -170,7 +173,11 @@ public class LoseDialogHard extends javax.swing.JDialog {
             }
         });
         getContentPane().add(quitButton);
-        quitButton.setBounds(470, 300, 160, 70);
+        quitButton.setBounds(550, 320, 160, 70);
+
+        pandaCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/deadPanda3.png"))); // NOI18N
+        getContentPane().add(pandaCry);
+        pandaCry.setBounds(150, 150, 380, 280);
 
         ReasonText.setEditable(false);
         ReasonText.setBackground(new java.awt.Color(140, 0, 0));
@@ -184,17 +191,14 @@ public class LoseDialogHard extends javax.swing.JDialog {
             }
         });
         getContentPane().add(ReasonText);
-        ReasonText.setBounds(0, 160, 650, 60);
-
-        pandaCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sad (2).gif"))); // NOI18N
-        getContentPane().add(pandaCry);
-        pandaCry.setBounds(160, 80, 330, 400);
+        ReasonText.setBounds(0, 160, 720, 60);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseDialog.png"))); // NOI18N
-        BackImage.setMaximumSize(new java.awt.Dimension(700, 450));
-        BackImage.setMinimumSize(new java.awt.Dimension(700, 450));
+        BackImage.setMaximumSize(new java.awt.Dimension(700, 440));
+        BackImage.setMinimumSize(new java.awt.Dimension(700, 440));
+        BackImage.setPreferredSize(new java.awt.Dimension(700, 440));
         getContentPane().add(BackImage);
-        BackImage.setBounds(0, 0, 652, 401);
+        BackImage.setBounds(0, -10, 720, 420);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
