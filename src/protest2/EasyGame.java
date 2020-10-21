@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,15 +42,14 @@ public class EasyGame extends javax.swing.JFrame {
         int ch;
         try{
            
-           FileReader fr=new FileReader("C:\\Users\\Uttam\\Documents\\Git\\TheHangmanGame_Git\\src\\words.txt");
+           FileReader fr=new FileReader("src\\data\\easyWords.txt");
            while ((ch=fr.read())!=-1){
                t=t+(""+(char)ch);
            }
            st=t.split("\r\n");
            str=st;
            
-        }catch(Exception e){
-            System.out.println("dfsf");
+        }catch(IOException e){
             setWords();
         }
     }
@@ -248,12 +248,11 @@ public class EasyGame extends javax.swing.JFrame {
     
     static void playWinLoseSound(){
         try{
-            String gongFile = "src/sounds/button-3.wav";
+            String gongFile = "src/sounds/menu.wav";
             InputStream in = new FileInputStream(gongFile);
             audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
         }catch(Exception e){
-            System.out.println(e);
             
         }
     }
@@ -264,58 +263,74 @@ public class EasyGame extends javax.swing.JFrame {
     }
     
     public void setInitialElements(){
-            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Normal.jpg"));
+            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\easyBack.jpg"));
             pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
+            lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
             xPanda=1000;
             yPanda=-350;
+            chances=6;
+            
             pandaAlive.setBounds(xPanda, yPanda, 230, 730);
-
+            wordspace.setBounds(450,80,560,90);
+            dragon4.setBounds(200,-80,450,270);
+            fireDragon1.setBounds(776,418,530,270);
+            
+            ProgressBar.setForeground(Color.green);
+            wordspace.setForeground(Color.white);
+            clockText.setForeground(Color.WHITE);
+            
             pandaAlive.setVisible(true);
             pandaDead.setVisible(false);
-
-            timerResetButton.doClick();
-            clockText.setForeground(Color.WHITE);
-            ProgressBar.setValue(100);
-            ProgressBar.setForeground(Color.green);
-            wordspace.setForeground(Color.black);
-            chances=6;
-            chancesValue.setText(String.valueOf(chances));
-            lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
-            fire.setVisible(true);
             fire1.setVisible(true);
-            //music.doClick();
+            chancesValue.setVisible(false);
             
+            switch (heartLives) {
+                case 3:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart3.png"));
+                    break;
+                case 2:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart2.png"));
+                    break;
+                case 1:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart1.png"));
+                    break;
+                default:
+                    heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart0.png"));
+                    Another.setEnabled(false);
+                    break;
+            }
+                
             
-            if(heartLives<=1)
-            Another.setEnabled(false);
-
-            int r=(int)(Math.random() * (str.length-1));
-            if(hash.contains(r))
+            ProgressBar.setValue(100);
+            chancesValue.setText(String.valueOf(chances));
+            
+            int r=0;
+            do{
                 r=(int)(Math.random() * (str.length-1));
-            if(hash.contains(r))
-                r=(int)(Math.random() * (str.length-1));
+                
+            }while(hash.contains(r));
             
             hash.add(r);
             word= str[r];
             word=word.toUpperCase();
             int len=word.length();
+            int compLen=15;
+            while(len<compLen){
+                wordspace.setBounds(wordspace.getX()+30, wordspace.getY(),
+                        wordspace.getWidth(), wordspace.getHeight());
+                compLen-=3;
+            }
             
-
             temp="";
-            hint="";
             
-            
-            //easyInitials
             temp=temp+word.charAt(0);
             for(int i=0;i<len-2;i++)
                 temp=temp+"-";
             temp=temp+word.charAt(word.length()-1);
-            
             ch=temp.toCharArray();
-            
             wordspace.setText(temp);
-
             show=temp;
+            timerResetButton.doClick();
     }
     
     public void changeValue(){
@@ -344,7 +359,6 @@ public class EasyGame extends javax.swing.JFrame {
         switch (chances) {
             case 6:
                 pandaAlive.setIcon(new javax.swing.ImageIcon("src\\Images\\panda60.png"));
-                //ProgressBar.setValue(100);
                 lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
                 break;
             case 5:
@@ -382,31 +396,23 @@ public class EasyGame extends javax.swing.JFrame {
         
         
         if(chances<1 && !word.equals(show)){
-            
-        playWinLoseSound();
-        ProgressBar.setValue(0);
-        pandaDead.setVisible(true);
-        
-        pandaAlive.setVisible(false);
-        BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
-        
-        
-        //LoseReason="ZeroGuesses";
-        timerReset();
-            
-        revealWord("lose");
-        loseWindow("noChance");
-            
-            
+
+            playWinLoseSound();
+            ProgressBar.setValue(0);
+            pandaDead.setVisible(true);
+            pandaAlive.setVisible(false);
+            timerReset();
+            revealWord("lose");
+            loseWindow("noChance");
+
         }
         else if(word.equals(show)){
             playWinLoseSound();
             revealWord("win");
             pandaAlive.setVisible(false);
             timerReset();
-            fire.setVisible(false);
             fire1.setVisible(false);
-            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Win.jpg"));
+            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\easyBack.jpg"));
             
             new MediumGame(homeRef, this,heartLives,score).show();
             this.dispose();
@@ -507,13 +513,13 @@ public class EasyGame extends javax.swing.JFrame {
     }
     
     public void anotherGame(){
-        
         setAlphabets();
         newGame();
     }
     
     public void loseWindow(String reason){
        heartLives--;
+       heartsRed.setIcon(new javax.swing.ImageIcon("src\\Images\\heart0.png"));
        new LoseDialogEasy(this,this,true,reason,heartLives,score).show();
     }    
        
@@ -521,7 +527,6 @@ public class EasyGame extends javax.swing.JFrame {
         homeRef.show();
         timerReset();
         this.dispose();
-        
     }
    
     public void alphabetSound(){
@@ -532,8 +537,7 @@ public class EasyGame extends javax.swing.JFrame {
             AudioStream audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
             
-        }catch(Exception e){
-            //System.out.println(e);
+        }catch(IOException e){
             
         }
         
@@ -547,8 +551,7 @@ public class EasyGame extends javax.swing.JFrame {
             AudioStream audioStream = new AudioStream(in);
             AudioPlayer.player.start(audioStream);
             
-        }catch(Exception e){
-            //System.out.println(e);
+        }catch(IOException e){
             
         }
         
@@ -572,6 +575,7 @@ public class EasyGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dragon4 = new javax.swing.JLabel();
         lives = new javax.swing.JLabel();
         chancesValue = new javax.swing.JLabel();
         wordspace = new javax.swing.JLabel();
@@ -582,7 +586,6 @@ public class EasyGame extends javax.swing.JFrame {
         D = new javax.swing.JButton();
         Z = new javax.swing.JButton();
         E = new javax.swing.JButton();
-        bird = new javax.swing.JLabel();
         F = new javax.swing.JButton();
         G = new javax.swing.JButton();
         H = new javax.swing.JButton();
@@ -601,40 +604,55 @@ public class EasyGame extends javax.swing.JFrame {
         Q = new javax.swing.JButton();
         P = new javax.swing.JButton();
         V = new javax.swing.JButton();
+        clockText = new javax.swing.JLabel();
         W = new javax.swing.JButton();
         X = new javax.swing.JButton();
         Y = new javax.swing.JButton();
         timerResetButton = new javax.swing.JButton();
-        clockText = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         ProgressBar = new javax.swing.JProgressBar();
-        fire = new javax.swing.JLabel();
-        pandaDead = new javax.swing.JLabel();
         fire1 = new javax.swing.JLabel();
+        pandaDead = new javax.swing.JLabel();
+        fireDragon1 = new javax.swing.JLabel();
         music = new javax.swing.JButton();
+        fireDragon2 = new javax.swing.JLabel();
+        heartsRed = new javax.swing.JLabel();
+        fireDragon4 = new javax.swing.JLabel();
+        fireDragon5 = new javax.swing.JLabel();
+        fire2 = new javax.swing.JLabel();
+        bird1 = new javax.swing.JLabel();
+        bird2 = new javax.swing.JLabel();
+        bird = new javax.swing.JLabel();
+        fireDragon6 = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        dragon4.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        dragon4.setForeground(new java.awt.Color(255, 255, 255));
+        dragon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon17.gif"))); // NOI18N
+        getContentPane().add(dragon4);
+        dragon4.setBounds(270, 10, 150, 180);
+
         lives.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         lives.setForeground(new java.awt.Color(51, 0, 0));
         lives.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Live6.png"))); // NOI18N
         getContentPane().add(lives);
-        lives.setBounds(670, 170, 200, 40);
+        lives.setBounds(620, 40, 200, 40);
 
         chancesValue.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        chancesValue.setForeground(new java.awt.Color(51, 0, 0));
+        chancesValue.setForeground(new java.awt.Color(255, 255, 255));
         chancesValue.setText("8");
         getContentPane().add(chancesValue);
-        chancesValue.setBounds(890, 160, 20, 50);
+        chancesValue.setBounds(970, 30, 20, 50);
 
         wordspace.setBackground(new java.awt.Color(102, 0, 0));
         wordspace.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
         wordspace.setText("ABCD");
         wordspace.setName(""); // NOI18N
         getContentPane().add(wordspace);
-        wordspace.setBounds(500, 50, 400, 90);
+        wordspace.setBounds(630, 70, 170, 90);
 
         Another.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/change.png"))); // NOI18N
         Another.setToolTipText("Change Word");
@@ -653,7 +671,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Another);
-        Another.setBounds(920, 100, 40, 40);
+        Another.setBounds(140, 90, 40, 40);
 
         A.setBackground(new java.awt.Color(25, 0, 0));
         A.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -668,7 +686,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(A);
-        A.setBounds(210, 550, 70, 60);
+        A.setBounds(530, 490, 70, 60);
 
         B.setBackground(new java.awt.Color(25, 0, 0));
         B.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -683,7 +701,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(B);
-        B.setBounds(40, 340, 70, 60);
+        B.setBounds(300, 550, 70, 60);
 
         C.setBackground(new java.awt.Color(25, 0, 0));
         C.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -698,7 +716,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(C);
-        C.setBounds(110, 270, 70, 60);
+        C.setBounds(550, 370, 70, 60);
 
         D.setBackground(new java.awt.Color(25, 0, 0));
         D.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -713,7 +731,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(D);
-        D.setBounds(230, 490, 70, 60);
+        D.setBounds(480, 420, 70, 60);
 
         Z.setBackground(new java.awt.Color(25, 0, 0));
         Z.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -728,7 +746,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Z);
-        Z.setBounds(210, 200, 70, 60);
+        Z.setBounds(430, 550, 70, 60);
 
         E.setBackground(new java.awt.Color(25, 0, 0));
         E.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -743,14 +761,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(E);
-        E.setBounds(50, 270, 70, 60);
-
-        bird.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
-        bird.setForeground(new java.awt.Color(255, 255, 255));
-        bird.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birds.gif"))); // NOI18N
-        bird.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
-        getContentPane().add(bird);
-        bird.setBounds(60, 140, 390, 260);
+        E.setBounds(550, 550, 70, 60);
 
         F.setBackground(new java.awt.Color(25, 0, 0));
         F.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -765,7 +776,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(F);
-        F.setBounds(350, 420, 70, 60);
+        F.setBounds(270, 430, 70, 60);
 
         G.setBackground(new java.awt.Color(25, 0, 0));
         G.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -780,7 +791,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(G);
-        G.setBounds(350, 340, 70, 60);
+        G.setBounds(430, 370, 70, 60);
 
         H.setBackground(new java.awt.Color(25, 0, 0));
         H.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -795,7 +806,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(H);
-        H.setBounds(50, 490, 70, 60);
+        H.setBounds(180, 550, 70, 60);
 
         I.setBackground(new java.awt.Color(25, 0, 0));
         I.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -810,7 +821,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(I);
-        I.setBounds(290, 420, 70, 60);
+        I.setBounds(340, 440, 70, 60);
 
         J.setBackground(new java.awt.Color(25, 0, 0));
         J.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -825,11 +836,11 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(J);
-        J.setBounds(100, 350, 70, 60);
+        J.setBounds(180, 370, 70, 60);
 
-        pandaAlive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda6.png"))); // NOI18N
+        pandaAlive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda60.png"))); // NOI18N
         getContentPane().add(pandaAlive);
-        pandaAlive.setBounds(1040, -160, 230, 930);
+        pandaAlive.setBounds(1020, 0, 180, 170);
 
         L.setBackground(new java.awt.Color(25, 0, 0));
         L.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -844,7 +855,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(L);
-        L.setBounds(110, 430, 70, 60);
+        L.setBounds(330, 490, 70, 60);
 
         M.setBackground(new java.awt.Color(25, 0, 0));
         M.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -859,7 +870,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(M);
-        M.setBounds(290, 330, 70, 60);
+        M.setBounds(360, 380, 70, 60);
 
         K.setBackground(new java.awt.Color(25, 0, 0));
         K.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -874,7 +885,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(K);
-        K.setBounds(290, 260, 70, 60);
+        K.setBounds(460, 480, 70, 60);
 
         N.setBackground(new java.awt.Color(25, 0, 0));
         N.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -889,7 +900,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(N);
-        N.setBounds(170, 420, 70, 60);
+        N.setBounds(200, 430, 70, 60);
 
         T.setBackground(new java.awt.Color(25, 0, 0));
         T.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -904,7 +915,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(T);
-        T.setBounds(230, 350, 70, 60);
+        T.setBounds(300, 370, 70, 60);
 
         S.setBackground(new java.awt.Color(25, 0, 0));
         S.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -919,7 +930,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(S);
-        S.setBounds(50, 420, 70, 60);
+        S.setBounds(240, 540, 70, 60);
 
         O.setBackground(new java.awt.Color(25, 0, 0));
         O.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -934,7 +945,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(O);
-        O.setBounds(170, 260, 70, 60);
+        O.setBounds(400, 490, 70, 60);
 
         U.setBackground(new java.awt.Color(25, 0, 0));
         U.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -949,7 +960,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(U);
-        U.setBounds(230, 270, 70, 60);
+        U.setBounds(360, 540, 70, 60);
 
         R.setBackground(new java.awt.Color(25, 0, 0));
         R.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -964,7 +975,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(R);
-        R.setBounds(350, 260, 70, 60);
+        R.setBounds(490, 360, 70, 60);
 
         Q.setBackground(new java.awt.Color(25, 0, 0));
         Q.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -979,7 +990,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Q);
-        Q.setBounds(170, 490, 70, 60);
+        Q.setBounds(260, 490, 70, 60);
 
         P.setBackground(new java.awt.Color(25, 0, 0));
         P.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -994,7 +1005,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(P);
-        P.setBounds(110, 500, 70, 60);
+        P.setBounds(190, 490, 70, 60);
 
         V.setBackground(new java.awt.Color(25, 0, 0));
         V.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1009,7 +1020,13 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(V);
-        V.setBounds(230, 430, 70, 60);
+        V.setBounds(550, 430, 70, 60);
+
+        clockText.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        clockText.setForeground(new java.awt.Color(255, 255, 255));
+        clockText.setText("45");
+        getContentPane().add(clockText);
+        clockText.setBounds(930, 5, 50, 30);
 
         W.setBackground(new java.awt.Color(25, 0, 0));
         W.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1024,7 +1041,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(W);
-        W.setBounds(290, 490, 70, 60);
+        W.setBounds(410, 430, 70, 60);
 
         X.setBackground(new java.awt.Color(25, 0, 0));
         X.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1039,7 +1056,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(X);
-        X.setBounds(160, 340, 70, 60);
+        X.setBounds(240, 360, 70, 60);
 
         Y.setBackground(new java.awt.Color(25, 0, 0));
         Y.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -1054,7 +1071,7 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Y);
-        Y.setBounds(350, 480, 70, 60);
+        Y.setBounds(490, 540, 70, 60);
 
         timerResetButton.setText("timerReset");
         timerResetButton.setFocusable(false);
@@ -1065,12 +1082,6 @@ public class EasyGame extends javax.swing.JFrame {
         });
         getContentPane().add(timerResetButton);
         timerResetButton.setBounds(1080, 720, 130, 23);
-
-        clockText.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
-        clockText.setForeground(new java.awt.Color(255, 255, 255));
-        clockText.setText("45");
-        getContentPane().add(clockText);
-        clockText.setBounds(720, 360, 90, 90);
 
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/backbutt.png"))); // NOI18N
         backButton.setText("Back");
@@ -1098,22 +1109,23 @@ public class EasyGame extends javax.swing.JFrame {
         ProgressBar.setFocusable(false);
         ProgressBar.setPreferredSize(new java.awt.Dimension(417, 22));
         getContentPane().add(ProgressBar);
-        ProgressBar.setBounds(495, 144, 417, 22);
-
-        fire.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire.gif"))); // NOI18N
-        fire.setText(" ");
-        getContentPane().add(fire);
-        fire.setBounds(910, 460, 530, 220);
-
-        pandaDead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda0.png"))); // NOI18N
-        pandaDead.setText(" ");
-        getContentPane().add(pandaDead);
-        pandaDead.setBounds(1040, 530, 290, 120);
+        ProgressBar.setBounds(500, 10, 417, 22);
 
         fire1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire.gif"))); // NOI18N
         fire1.setText(" ");
         getContentPane().add(fire1);
-        fire1.setBounds(980, 460, 530, 220);
+        fire1.setBounds(1020, 500, 430, 200);
+
+        pandaDead.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/panda0.png"))); // NOI18N
+        pandaDead.setText(" ");
+        getContentPane().add(pandaDead);
+        pandaDead.setBounds(1130, 560, 290, 120);
+
+        fireDragon1.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        fireDragon1.setForeground(new java.awt.Color(255, 255, 255));
+        fireDragon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fireDragon.gif"))); // NOI18N
+        getContentPane().add(fireDragon1);
+        fireDragon1.setBounds(780, 550, 200, 130);
 
         music.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/musicPlay.png"))); // NOI18N
         music.setToolTipText("Play/Stop Backgroud Music");
@@ -1130,9 +1142,65 @@ public class EasyGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(music);
-        music.setBounds(920, 50, 40, 40);
+        music.setBounds(80, 90, 40, 40);
 
-        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/extBG_Normal.jpg"))); // NOI18N
+        fireDragon2.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        fireDragon2.setForeground(new java.awt.Color(255, 255, 255));
+        fireDragon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire10.gif"))); // NOI18N
+        getContentPane().add(fireDragon2);
+        fireDragon2.setBounds(1082, 482, 120, 70);
+
+        heartsRed.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        heartsRed.setForeground(new java.awt.Color(255, 255, 255));
+        heartsRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/heart3.png"))); // NOI18N
+        getContentPane().add(heartsRed);
+        heartsRed.setBounds(1250, 0, 120, 50);
+
+        fireDragon4.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        fireDragon4.setForeground(new java.awt.Color(255, 255, 255));
+        fireDragon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire11.gif"))); // NOI18N
+        getContentPane().add(fireDragon4);
+        fireDragon4.setBounds(1290, 440, 90, 60);
+
+        fireDragon5.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        fireDragon5.setForeground(new java.awt.Color(255, 255, 255));
+        fireDragon5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire10.gif"))); // NOI18N
+        getContentPane().add(fireDragon5);
+        fireDragon5.setBounds(1255, 335, 190, 120);
+
+        fire2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire.gif"))); // NOI18N
+        fire2.setText(" ");
+        getContentPane().add(fire2);
+        fire2.setBounds(1010, 500, 430, 190);
+
+        bird1.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        bird1.setForeground(new java.awt.Color(255, 255, 255));
+        bird1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/birds.gif"))); // NOI18N
+        bird1.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        getContentPane().add(bird1);
+        bird1.setBounds(640, 140, 440, 240);
+
+        bird2.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        bird2.setForeground(new java.awt.Color(255, 255, 255));
+        bird2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/board.png"))); // NOI18N
+        bird2.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        getContentPane().add(bird2);
+        bird2.setBounds(170, 250, 460, 570);
+
+        bird.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        bird.setForeground(new java.awt.Color(255, 255, 255));
+        bird.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire10.gif"))); // NOI18N
+        bird.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        getContentPane().add(bird);
+        bird.setBounds(90, 290, 110, 180);
+
+        fireDragon6.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        fireDragon6.setForeground(new java.awt.Color(255, 255, 255));
+        fireDragon6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fire9.gif"))); // NOI18N
+        getContentPane().add(fireDragon6);
+        fireDragon6.setBounds(1092, 330, 190, 120);
+
+        BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/easyBack.jpg"))); // NOI18N
         BackImage.setText(".");
         getContentPane().add(BackImage);
         BackImage.setBounds(0, 0, 1380, 770);
@@ -1503,7 +1571,7 @@ public class EasyGame extends javax.swing.JFrame {
             timerReset();
             //LoseReason="Timeout";
             ProgressBar.setValue(0);
-            BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
+            //BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\extBG_Lose.jpg"));
             pandaAlive.setVisible(false);
             pandaDead.setVisible(true);
             revealWord("lose");
@@ -1533,7 +1601,7 @@ public class EasyGame extends javax.swing.JFrame {
                 music.setIcon(new javax.swing.ImageIcon("src\\Images\\musicMute.png"));
             }
             else{
-                System.out.println("dd");
+                //System.out.println("dd");
                 InputStream in = new FileInputStream(homeRef.gongFile);
                 homeRef.audioStream = new AudioStream(in);
                 AudioPlayer.player.start(homeRef.audioStream);
@@ -1627,10 +1695,19 @@ public class EasyGame extends javax.swing.JFrame {
     private javax.swing.JButton Z;
     private javax.swing.JButton backButton;
     private javax.swing.JLabel bird;
+    private javax.swing.JLabel bird1;
+    private javax.swing.JLabel bird2;
     private javax.swing.JLabel chancesValue;
     private javax.swing.JLabel clockText;
-    private javax.swing.JLabel fire;
+    private javax.swing.JLabel dragon4;
     private javax.swing.JLabel fire1;
+    private javax.swing.JLabel fire2;
+    private javax.swing.JLabel fireDragon1;
+    private javax.swing.JLabel fireDragon2;
+    private javax.swing.JLabel fireDragon4;
+    private javax.swing.JLabel fireDragon5;
+    private javax.swing.JLabel fireDragon6;
+    private javax.swing.JLabel heartsRed;
     private javax.swing.JLabel lives;
     private javax.swing.JButton music;
     private javax.swing.JLabel pandaAlive;
