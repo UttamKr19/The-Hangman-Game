@@ -36,6 +36,8 @@ public class HardGame extends javax.swing.JFrame {
         initComponents();
         setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        dispose();
+        setUndecorated(true);
         newGame();
     }
     
@@ -47,6 +49,8 @@ public class HardGame extends javax.swing.JFrame {
         initComponents();
         setWordsFromFile();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        dispose();
+        setUndecorated(true);
         newGame();
     }
    
@@ -264,18 +268,18 @@ public class HardGame extends javax.swing.JFrame {
             BackImage.setIcon(new javax.swing.ImageIcon("src\\Images\\hardBack.jpg"));
             lives.setIcon(new javax.swing.ImageIcon("src\\Images\\live6.png"));
             
-            xPanda=230;
-            xMonster=-480;
+            xPanda=210;
+            xDragon=-240;
             xZombie1=0;
             xZombie2=-10;
-            yMonster=-10;
+            yDragon=130;
             xGroundMonster=-500;
             
             chances=6;
             
             pandaRun.setBounds(xPanda, 530, 160,110);
-            dragon2.setBounds(xMonster, yMonster, 440, 440);
-            wordspace.setBounds(780,80,490,90);
+            dragon2.setBounds(xDragon, yDragon, 190, 190);
+            wordspace.setBounds(400,30,490,90);
             treeBG.setBounds(0,0,830,480);
             groundMonster.setBounds(-500,400,180,250);
             
@@ -286,6 +290,7 @@ public class HardGame extends javax.swing.JFrame {
             pandaRun.setVisible(true);
             chancesValue.setVisible(false);
             clockText.setVisible(false);
+            timerResetButton.setVisible(false);
             
             groundMonster.setVisible(true);
             zombie1.setVisible(true);
@@ -352,8 +357,9 @@ public class HardGame extends javax.swing.JFrame {
                 al.add(i);
             }
         }
-        if(al.isEmpty())
+        if(al.isEmpty()){
             chances--;
+        }
         else{
             for(int i=0;i<al.size();i++){
                 ch[al.get(i)]=butt;
@@ -567,24 +573,27 @@ public class HardGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        wordspace = new javax.swing.JLabel();
+        holderWood = new javax.swing.JLabel();
         dragon2 = new javax.swing.JLabel();
         music = new javax.swing.JButton();
         Another = new javax.swing.JButton();
-        wordspace = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         zombie1 = new javax.swing.JLabel();
         groundMonster = new javax.swing.JLabel();
-        treeBG = new javax.swing.JLabel();
         lives = new javax.swing.JLabel();
+        heartsRed = new javax.swing.JLabel();
+        ProgressBar = new javax.swing.JProgressBar();
+        treeBG = new javax.swing.JLabel();
         chancesValue = new javax.swing.JLabel();
         A = new javax.swing.JButton();
         B = new javax.swing.JButton();
         C = new javax.swing.JButton();
         D = new javax.swing.JButton();
         Z = new javax.swing.JButton();
-        E = new javax.swing.JButton();
         F = new javax.swing.JButton();
         G = new javax.swing.JButton();
+        E = new javax.swing.JButton();
         H = new javax.swing.JButton();
         I = new javax.swing.JButton();
         J = new javax.swing.JButton();
@@ -605,24 +614,35 @@ public class HardGame extends javax.swing.JFrame {
         timerResetButton = new javax.swing.JButton();
         clockText = new javax.swing.JLabel();
         pandaRun1 = new javax.swing.JLabel();
-        ProgressBar = new javax.swing.JProgressBar();
         pandaRun = new javax.swing.JLabel();
         L = new javax.swing.JButton();
         bird1 = new javax.swing.JLabel();
         dragon33 = new javax.swing.JLabel();
-        dragon98 = new javax.swing.JLabel();
         skeleton = new javax.swing.JLabel();
-        heartsRed = new javax.swing.JLabel();
         zombie2 = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
+        zombie3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        dragon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon46.gif"))); // NOI18N
+        wordspace.setBackground(new java.awt.Color(102, 0, 0));
+        wordspace.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
+        wordspace.setForeground(new java.awt.Color(255, 255, 255));
+        wordspace.setText("ABCD");
+        wordspace.setName(""); // NOI18N
+        getContentPane().add(wordspace);
+        wordspace.setBounds(560, 30, 170, 90);
+
+        holderWood.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/holder.png"))); // NOI18N
+        holderWood.setText(" ");
+        getContentPane().add(holderWood);
+        holderWood.setBounds(410, -50, 500, 170);
+
+        dragon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon6.gif"))); // NOI18N
         dragon2.setText(" ");
         getContentPane().add(dragon2);
-        dragon2.setBounds(270, 440, 210, 190);
+        dragon2.setBounds(0, 130, 190, 190);
 
         music.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/musicPlay.png"))); // NOI18N
         music.setToolTipText("Play/Stop Backgroud Music");
@@ -639,7 +659,7 @@ public class HardGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(music);
-        music.setBounds(80, 90, 40, 40);
+        music.setBounds(1270, 50, 40, 40);
 
         Another.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/change.png"))); // NOI18N
         Another.setToolTipText("Change Word");
@@ -658,18 +678,9 @@ public class HardGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Another);
-        Another.setBounds(140, 90, 40, 40);
-
-        wordspace.setBackground(new java.awt.Color(102, 0, 0));
-        wordspace.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
-        wordspace.setForeground(new java.awt.Color(255, 255, 255));
-        wordspace.setText("ABCD");
-        wordspace.setName(""); // NOI18N
-        getContentPane().add(wordspace);
-        wordspace.setBounds(780, 70, 170, 90);
+        Another.setBounds(1320, 50, 40, 40);
 
         backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/backbutt.png"))); // NOI18N
-        backButton.setText("Back");
         backButton.setBorder(null);
         backButton.setBorderPainted(false);
         backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
@@ -685,30 +696,48 @@ public class HardGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButton);
-        backButton.setBounds(-100, 20, 290, 60);
+        backButton.setBounds(1260, 0, 110, 40);
 
-        zombie1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/zombie2.gif"))); // NOI18N
+        zombie1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/zombie3.gif"))); // NOI18N
         zombie1.setText(" ");
         getContentPane().add(zombie1);
-        zombie1.setBounds(10, 580, 100, 100);
+        zombie1.setBounds(80, 600, 90, 100);
 
         groundMonster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/monster34.gif"))); // NOI18N
         groundMonster.setText(" ");
         getContentPane().add(groundMonster);
         groundMonster.setBounds(90, 430, 160, 210);
 
-        treeBG.setBackground(new java.awt.Color(102, 0, 0));
-        treeBG.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
-        treeBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/trees.png"))); // NOI18N
-        treeBG.setName(""); // NOI18N
-        getContentPane().add(treeBG);
-        treeBG.setBounds(0, 0, 150, 480);
-
         lives.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         lives.setForeground(new java.awt.Color(51, 0, 0));
         lives.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Live6.png"))); // NOI18N
         getContentPane().add(lives);
-        lives.setBounds(930, 40, 200, 40);
+        lives.setBounds(0, 70, 200, 30);
+
+        heartsRed.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
+        heartsRed.setForeground(new java.awt.Color(255, 255, 255));
+        heartsRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/heart3.png"))); // NOI18N
+        getContentPane().add(heartsRed);
+        heartsRed.setBounds(0, 0, 120, 50);
+
+        ProgressBar.setBackground(new java.awt.Color(0, 0, 0));
+        ProgressBar.setForeground(new java.awt.Color(0, 255, 0));
+        ProgressBar.setValue(20);
+        ProgressBar.setBorderPainted(false);
+        ProgressBar.setFocusable(false);
+        ProgressBar.setPreferredSize(new java.awt.Dimension(417, 22));
+        getContentPane().add(ProgressBar);
+        ProgressBar.setBounds(0, 50, 200, 15);
+
+        treeBG.setBackground(new java.awt.Color(102, 0, 0));
+        treeBG.setFont(new java.awt.Font("Batang", 1, 60)); // NOI18N
+        treeBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/trees.png"))); // NOI18N
+        treeBG.setFocusable(false);
+        treeBG.setName(""); // NOI18N
+        treeBG.setRequestFocusEnabled(false);
+        treeBG.setVerifyInputWhenFocusTarget(false);
+        getContentPane().add(treeBG);
+        treeBG.setBounds(0, 0, 110, 170);
 
         chancesValue.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         chancesValue.setForeground(new java.awt.Color(255, 255, 255));
@@ -717,56 +746,62 @@ public class HardGame extends javax.swing.JFrame {
         chancesValue.setBounds(780, 210, 20, 50);
 
         A.setBackground(new java.awt.Color(10, 0, 0));
-        A.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        A.setForeground(new java.awt.Color(255, 255, 255));
+        A.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        A.setForeground(new java.awt.Color(153, 153, 153));
         A.setText("A");
-        A.setBorder(null);
+        A.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         A.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         A.setFocusPainted(false);
         A.setFocusable(false);
+        A.setRequestFocusEnabled(false);
+        A.setRolloverEnabled(false);
         A.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AActionPerformed(evt);
             }
         });
         getContentPane().add(A);
-        A.setBounds(540, 300, 50, 50);
+        A.setBounds(540, 300, 40, 40);
 
         B.setBackground(new java.awt.Color(10, 0, 0));
-        B.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        B.setForeground(new java.awt.Color(255, 255, 255));
+        B.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        B.setForeground(new java.awt.Color(153, 153, 153));
         B.setText("B");
         B.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         B.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         B.setFocusPainted(false);
         B.setFocusable(false);
+        B.setRequestFocusEnabled(false);
+        B.setRolloverEnabled(false);
         B.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BActionPerformed(evt);
             }
         });
         getContentPane().add(B);
-        B.setBounds(80, 210, 50, 50);
+        B.setBounds(80, 210, 40, 40);
 
         C.setBackground(new java.awt.Color(10, 0, 0));
-        C.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        C.setForeground(new java.awt.Color(255, 255, 255));
+        C.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        C.setForeground(new java.awt.Color(153, 153, 153));
         C.setText("C");
         C.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         C.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         C.setFocusPainted(false);
         C.setFocusable(false);
+        C.setRequestFocusEnabled(false);
+        C.setRolloverEnabled(false);
         C.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CActionPerformed(evt);
             }
         });
         getContentPane().add(C);
-        C.setBounds(120, 190, 50, 50);
+        C.setBounds(130, 190, 40, 40);
 
         D.setBackground(new java.awt.Color(10, 0, 0));
-        D.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        D.setForeground(new java.awt.Color(255, 255, 255));
+        D.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        D.setForeground(new java.awt.Color(153, 153, 153));
         D.setText("D");
         D.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         D.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
@@ -778,123 +813,137 @@ public class HardGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(D);
-        D.setBounds(10, 270, 50, 50);
+        D.setBounds(10, 270, 40, 40);
 
         Z.setBackground(new java.awt.Color(10, 0, 0));
-        Z.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        Z.setForeground(new java.awt.Color(255, 255, 255));
+        Z.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        Z.setForeground(new java.awt.Color(153, 153, 153));
         Z.setText("Z");
         Z.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Z.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         Z.setFocusPainted(false);
         Z.setFocusable(false);
+        Z.setRequestFocusEnabled(false);
+        Z.setRolloverEnabled(false);
         Z.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ZActionPerformed(evt);
             }
         });
         getContentPane().add(Z);
-        Z.setBounds(400, 120, 50, 50);
-
-        E.setBackground(new java.awt.Color(10, 0, 0));
-        E.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        E.setForeground(new java.awt.Color(255, 255, 255));
-        E.setText("E");
-        E.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        E.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
-        E.setFocusPainted(false);
-        E.setFocusable(false);
-        E.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EActionPerformed(evt);
-            }
-        });
-        getContentPane().add(E);
-        E.setBounds(330, 250, 50, 50);
+        Z.setBounds(370, 170, 40, 40);
 
         F.setBackground(new java.awt.Color(10, 0, 0));
-        F.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        F.setForeground(new java.awt.Color(255, 255, 255));
+        F.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        F.setForeground(new java.awt.Color(153, 153, 153));
         F.setText("F");
-        F.setBorder(null);
+        F.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         F.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         F.setFocusPainted(false);
         F.setFocusable(false);
+        F.setRequestFocusEnabled(false);
+        F.setRolloverEnabled(false);
         F.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FActionPerformed(evt);
             }
         });
         getContentPane().add(F);
-        F.setBounds(630, 190, 50, 50);
+        F.setBounds(620, 220, 40, 40);
 
         G.setBackground(new java.awt.Color(10, 0, 0));
-        G.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        G.setForeground(new java.awt.Color(255, 255, 255));
+        G.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        G.setForeground(new java.awt.Color(153, 153, 153));
         G.setText("G");
         G.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         G.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         G.setFocusPainted(false);
         G.setFocusable(false);
+        G.setRequestFocusEnabled(false);
+        G.setRolloverEnabled(false);
         G.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GActionPerformed(evt);
             }
         });
         getContentPane().add(G);
-        G.setBounds(100, 250, 50, 50);
+        G.setBounds(100, 250, 40, 40);
+
+        E.setBackground(new java.awt.Color(10, 0, 0));
+        E.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        E.setForeground(new java.awt.Color(153, 153, 153));
+        E.setText("E");
+        E.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        E.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        E.setFocusPainted(false);
+        E.setFocusable(false);
+        E.setRequestFocusEnabled(false);
+        E.setRolloverEnabled(false);
+        E.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EActionPerformed(evt);
+            }
+        });
+        getContentPane().add(E);
+        E.setBounds(340, 270, 40, 40);
 
         H.setBackground(new java.awt.Color(10, 0, 0));
-        H.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        H.setForeground(new java.awt.Color(255, 255, 255));
+        H.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        H.setForeground(new java.awt.Color(153, 153, 153));
         H.setText("H");
         H.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         H.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         H.setFocusPainted(false);
         H.setFocusable(false);
+        H.setRequestFocusEnabled(false);
+        H.setRolloverEnabled(false);
         H.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HActionPerformed(evt);
             }
         });
         getContentPane().add(H);
-        H.setBounds(320, 310, 50, 50);
+        H.setBounds(320, 310, 40, 40);
 
         I.setBackground(new java.awt.Color(10, 0, 0));
-        I.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        I.setForeground(new java.awt.Color(255, 255, 255));
+        I.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        I.setForeground(new java.awt.Color(153, 153, 153));
         I.setText("I");
         I.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         I.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         I.setFocusPainted(false);
         I.setFocusable(false);
+        I.setRequestFocusEnabled(false);
+        I.setRolloverEnabled(false);
         I.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IActionPerformed(evt);
             }
         });
         getContentPane().add(I);
-        I.setBounds(370, 360, 50, 50);
+        I.setBounds(380, 370, 40, 40);
 
         J.setBackground(new java.awt.Color(10, 0, 0));
-        J.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        J.setForeground(new java.awt.Color(255, 255, 255));
+        J.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        J.setForeground(new java.awt.Color(153, 153, 153));
         J.setText("J");
-        J.setBorder(null);
+        J.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         J.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         J.setFocusPainted(false);
         J.setFocusable(false);
+        J.setRequestFocusEnabled(false);
+        J.setRolloverEnabled(false);
         J.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JActionPerformed(evt);
             }
         });
         getContentPane().add(J);
-        J.setBounds(600, 360, 50, 50);
+        J.setBounds(430, 270, 40, 40);
 
         M.setBackground(new java.awt.Color(10, 0, 0));
-        M.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        M.setForeground(new java.awt.Color(255, 255, 255));
+        M.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        M.setForeground(new java.awt.Color(153, 153, 153));
         M.setText("M");
         M.setBorder(null);
         M.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
@@ -906,11 +955,11 @@ public class HardGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(M);
-        M.setBounds(650, 130, 50, 50);
+        M.setBounds(-10, 170, 40, 40);
 
         K.setBackground(new java.awt.Color(10, 0, 0));
-        K.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        K.setForeground(new java.awt.Color(255, 255, 255));
+        K.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        K.setForeground(new java.awt.Color(153, 153, 153));
         K.setText("K");
         K.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         K.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
@@ -922,199 +971,223 @@ public class HardGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(K);
-        K.setBounds(0, 220, 50, 50);
+        K.setBounds(0, 220, 40, 40);
 
         N.setBackground(new java.awt.Color(10, 0, 0));
-        N.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        N.setForeground(new java.awt.Color(255, 255, 255));
+        N.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        N.setForeground(new java.awt.Color(153, 153, 153));
         N.setText("N");
-        N.setBorder(null);
+        N.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         N.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         N.setFocusPainted(false);
         N.setFocusable(false);
+        N.setRequestFocusEnabled(false);
+        N.setRolloverEnabled(false);
         N.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NActionPerformed(evt);
             }
         });
         getContentPane().add(N);
-        N.setBounds(550, 350, 50, 50);
+        N.setBounds(532, 350, 40, 40);
 
         T.setBackground(new java.awt.Color(10, 0, 0));
-        T.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        T.setForeground(new java.awt.Color(255, 255, 255));
+        T.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        T.setForeground(new java.awt.Color(153, 153, 153));
         T.setText("T");
         T.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         T.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         T.setFocusPainted(false);
         T.setFocusable(false);
+        T.setRequestFocusEnabled(false);
+        T.setRolloverEnabled(false);
         T.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TActionPerformed(evt);
             }
         });
         getContentPane().add(T);
-        T.setBounds(300, 190, 50, 50);
+        T.setBounds(300, 230, 40, 40);
 
         S.setBackground(new java.awt.Color(10, 0, 0));
-        S.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        S.setForeground(new java.awt.Color(255, 255, 255));
+        S.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        S.setForeground(new java.awt.Color(153, 153, 153));
         S.setText("S");
         S.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         S.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         S.setFocusPainted(false);
         S.setFocusable(false);
+        S.setRequestFocusEnabled(false);
+        S.setRolloverEnabled(false);
         S.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SActionPerformed(evt);
             }
         });
         getContentPane().add(S);
-        S.setBounds(500, 30, 50, 50);
+        S.setBounds(557, 237, 40, 40);
 
         O.setBackground(new java.awt.Color(10, 0, 0));
-        O.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        O.setForeground(new java.awt.Color(255, 255, 255));
+        O.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        O.setForeground(new java.awt.Color(153, 153, 153));
         O.setText("O");
         O.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         O.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         O.setFocusPainted(false);
         O.setFocusable(false);
+        O.setRequestFocusEnabled(false);
+        O.setRolloverEnabled(false);
         O.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OActionPerformed(evt);
             }
         });
         getContentPane().add(O);
-        O.setBounds(440, 200, 50, 50);
+        O.setBounds(440, 230, 40, 40);
 
         U.setBackground(new java.awt.Color(10, 0, 0));
-        U.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        U.setForeground(new java.awt.Color(255, 255, 255));
+        U.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        U.setForeground(new java.awt.Color(153, 153, 153));
         U.setText("U");
         U.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         U.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         U.setFocusPainted(false);
         U.setFocusable(false);
+        U.setRequestFocusEnabled(false);
+        U.setRolloverEnabled(false);
         U.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UActionPerformed(evt);
             }
         });
         getContentPane().add(U);
-        U.setBounds(90, 300, 50, 50);
+        U.setBounds(90, 300, 40, 40);
 
         R.setBackground(new java.awt.Color(10, 0, 0));
-        R.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        R.setForeground(new java.awt.Color(255, 255, 255));
+        R.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        R.setForeground(new java.awt.Color(153, 153, 153));
         R.setText("R");
-        R.setBorder(null);
+        R.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         R.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         R.setFocusPainted(false);
         R.setFocusable(false);
+        R.setRequestFocusEnabled(false);
+        R.setRolloverEnabled(false);
         R.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RActionPerformed(evt);
             }
         });
         getContentPane().add(R);
-        R.setBounds(660, 80, 50, 50);
+        R.setBounds(630, 260, 40, 40);
 
         Q.setBackground(new java.awt.Color(10, 0, 0));
-        Q.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        Q.setForeground(new java.awt.Color(255, 255, 255));
+        Q.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        Q.setForeground(new java.awt.Color(153, 153, 153));
         Q.setText("Q");
         Q.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Q.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         Q.setFocusPainted(false);
         Q.setFocusable(false);
+        Q.setRequestFocusEnabled(false);
+        Q.setRolloverEnabled(false);
         Q.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 QActionPerformed(evt);
             }
         });
         getContentPane().add(Q);
-        Q.setBounds(320, 140, 50, 50);
+        Q.setBounds(320, 130, 40, 40);
 
         P.setBackground(new java.awt.Color(10, 0, 0));
-        P.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        P.setForeground(new java.awt.Color(255, 255, 255));
+        P.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        P.setForeground(new java.awt.Color(153, 153, 153));
         P.setText("P");
         P.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         P.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         P.setFocusPainted(false);
         P.setFocusable(false);
+        P.setRequestFocusEnabled(false);
+        P.setRolloverEnabled(false);
         P.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PActionPerformed(evt);
             }
         });
         getContentPane().add(P);
-        P.setBounds(320, 370, 50, 50);
+        P.setBounds(310, 380, 40, 40);
 
         V.setBackground(new java.awt.Color(10, 0, 0));
-        V.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        V.setForeground(new java.awt.Color(255, 255, 255));
+        V.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        V.setForeground(new java.awt.Color(153, 153, 153));
         V.setText("V");
-        V.setBorder(null);
+        V.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         V.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         V.setFocusPainted(false);
         V.setFocusable(false);
+        V.setRequestFocusEnabled(false);
+        V.setRolloverEnabled(false);
         V.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 VActionPerformed(evt);
             }
         });
         getContentPane().add(V);
-        V.setBounds(660, 20, 50, 50);
+        V.setBounds(450, 190, 40, 40);
 
         W.setBackground(new java.awt.Color(10, 0, 0));
-        W.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        W.setForeground(new java.awt.Color(255, 255, 255));
+        W.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        W.setForeground(new java.awt.Color(153, 153, 153));
         W.setText("W");
         W.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         W.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         W.setFocusPainted(false);
         W.setFocusable(false);
+        W.setRequestFocusEnabled(false);
+        W.setRolloverEnabled(false);
         W.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 WActionPerformed(evt);
             }
         });
         getContentPane().add(W);
-        W.setBounds(350, 60, 50, 50);
+        W.setBounds(90, 160, 40, 40);
 
         X.setBackground(new java.awt.Color(10, 0, 0));
-        X.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        X.setForeground(new java.awt.Color(255, 255, 255));
+        X.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        X.setForeground(new java.awt.Color(153, 153, 153));
         X.setText("X");
         X.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         X.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         X.setFocusPainted(false);
         X.setFocusable(false);
+        X.setRequestFocusEnabled(false);
+        X.setRolloverEnabled(false);
         X.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 XActionPerformed(evt);
             }
         });
         getContentPane().add(X);
-        X.setBounds(350, 200, 50, 50);
+        X.setBounds(350, 220, 40, 40);
 
         Y.setBackground(new java.awt.Color(10, 0, 0));
-        Y.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        Y.setForeground(new java.awt.Color(255, 255, 255));
+        Y.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        Y.setForeground(new java.awt.Color(153, 153, 153));
         Y.setText("Y");
         Y.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Y.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         Y.setFocusPainted(false);
         Y.setFocusable(false);
+        Y.setRequestFocusEnabled(false);
+        Y.setRolloverEnabled(false);
         Y.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 YActionPerformed(evt);
             }
         });
         getContentPane().add(Y);
-        Y.setBounds(400, 70, 50, 50);
+        Y.setBounds(310, 190, 40, 40);
 
         timerResetButton.setText("timerReset");
         timerResetButton.setFocusable(false);
@@ -1137,23 +1210,14 @@ public class HardGame extends javax.swing.JFrame {
         getContentPane().add(pandaRun1);
         pandaRun1.setBounds(0, 360, 130, 90);
 
-        ProgressBar.setBackground(new java.awt.Color(0, 0, 0));
-        ProgressBar.setForeground(new java.awt.Color(0, 255, 0));
-        ProgressBar.setValue(20);
-        ProgressBar.setBorderPainted(false);
-        ProgressBar.setFocusable(false);
-        ProgressBar.setPreferredSize(new java.awt.Dimension(417, 22));
-        getContentPane().add(ProgressBar);
-        ProgressBar.setBounds(820, 10, 417, 22);
-
         pandaRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/pandaRunning.gif"))); // NOI18N
         pandaRun.setText(" ");
         getContentPane().add(pandaRun);
-        pandaRun.setBounds(580, 530, 100, 110);
+        pandaRun.setBounds(620, 530, 100, 110);
 
         L.setBackground(new java.awt.Color(10, 0, 0));
-        L.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        L.setForeground(new java.awt.Color(255, 255, 255));
+        L.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 20)); // NOI18N
+        L.setForeground(new java.awt.Color(153, 153, 153));
         L.setText("L");
         L.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         L.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
@@ -1165,7 +1229,7 @@ public class HardGame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(L);
-        L.setBounds(0, 320, 50, 50);
+        L.setBounds(0, 320, 40, 40);
 
         bird1.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
         bird1.setForeground(new java.awt.Color(255, 255, 255));
@@ -1176,33 +1240,27 @@ public class HardGame extends javax.swing.JFrame {
 
         dragon33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon29.gif"))); // NOI18N
         getContentPane().add(dragon33);
-        dragon33.setBounds(1190, 80, 140, 190);
-
-        dragon98.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon23.gif"))); // NOI18N
-        dragon98.setText(" ");
-        getContentPane().add(dragon98);
-        dragon98.setBounds(290, 330, 170, 100);
+        dragon33.setBounds(1200, 160, 140, 190);
 
         skeleton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/skeleton3.gif"))); // NOI18N
         skeleton.setText(" ");
         getContentPane().add(skeleton);
         skeleton.setBounds(1030, 228, 50, 170);
 
-        heartsRed.setFont(new java.awt.Font("Dialog", 1, 50)); // NOI18N
-        heartsRed.setForeground(new java.awt.Color(255, 255, 255));
-        heartsRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/heart3.png"))); // NOI18N
-        getContentPane().add(heartsRed);
-        heartsRed.setBounds(1250, 0, 120, 50);
-
-        zombie2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/zombie3.gif"))); // NOI18N
+        zombie2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/trex.gif"))); // NOI18N
         zombie2.setText(" ");
         getContentPane().add(zombie2);
-        zombie2.setBounds(30, 470, 100, 100);
+        zombie2.setBounds(30, 490, 140, 100);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/hardBack.jpg"))); // NOI18N
         BackImage.setText(".");
         getContentPane().add(BackImage);
         BackImage.setBounds(0, 0, 1390, 770);
+
+        zombie3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/zombie2.gif"))); // NOI18N
+        zombie3.setText(" ");
+        getContentPane().add(zombie3);
+        zombie3.setBounds(10, 580, 100, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1505,40 +1563,39 @@ public class HardGame extends javax.swing.JFrame {
     int xPanda=350;
     int yPanda=500;
     int ySoul=430;
-    int xMonster=-100;
-    int yMonster=280;
+    int xDragon=-100;
+    int yDragon=280;
     int xZombie1=0;
     int xZombie2=0;
     int xGroundMonster=-500;
     
     private void timerResetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timerResetButtonActionPerformed
         
-        time=359;
+        time=500;
         
         timer = new Timer(100, new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         
         timeText=time/10;
-        double temp=(100/(double)35.9)*((double)time/10);
+        double temp=(100/(double)49.9)*((double)time/10);
         ProgressBar.setValue((int)temp);
         
         if (timeText >= 0 && pandaRun.getX()>100) {
             clockText.setText(Integer.toString(timeText));
             
             //----------------------------------------
-            if(timeText>30){
-                xMonster+=3;
-                
+            if(timeText%3==0){
+                xDragon+=3;
             }
             else{
-                xMonster+=4;
+                xDragon+=3;
             }
                 
             if(timeText<15){
-                yMonster+=2;
+                yDragon+=2;
             }
-            if(timeText<20){
+            if(timeText<10){
                 xPanda++;
             }
             xZombie1+=1;
@@ -1547,7 +1604,7 @@ public class HardGame extends javax.swing.JFrame {
             xGroundMonster+=3;
             
             pandaRun.setBounds(xPanda, pandaRun.getY(), pandaRun.getWidth(),pandaRun.getHeight());
-            dragon2.setBounds(xMonster, yMonster, dragon2.getWidth(), dragon2.getHeight());
+            dragon2.setBounds(xDragon, yDragon, dragon2.getWidth(), dragon2.getHeight());
             zombie1.setBounds(xZombie1, zombie1.getY(), zombie1.getWidth(), zombie1.getHeight());
             zombie2.setBounds(xZombie2, zombie2.getY(), zombie2.getWidth(), zombie2.getHeight());
             groundMonster.setBounds(xGroundMonster, groundMonster.getY(), groundMonster.getWidth(), groundMonster.getHeight());
@@ -1711,9 +1768,9 @@ public class HardGame extends javax.swing.JFrame {
     private javax.swing.JLabel clockText;
     private javax.swing.JLabel dragon2;
     private javax.swing.JLabel dragon33;
-    private javax.swing.JLabel dragon98;
     private javax.swing.JLabel groundMonster;
     private javax.swing.JLabel heartsRed;
+    private javax.swing.JLabel holderWood;
     private javax.swing.JLabel lives;
     private javax.swing.JButton music;
     private javax.swing.JLabel pandaRun;
@@ -1724,5 +1781,6 @@ public class HardGame extends javax.swing.JFrame {
     private javax.swing.JLabel wordspace;
     private javax.swing.JLabel zombie1;
     private javax.swing.JLabel zombie2;
+    private javax.swing.JLabel zombie3;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,15 +28,20 @@ public class HowToPlay extends javax.swing.JFrame {
     public HowToPlay() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        dispose();
+        setUndecorated(true);
     }
     
     public HowToPlay(Home ref) {
         temp=ref;
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
         animation.setVisible(false);
         animation.doClick();
+        
+        dispose();
+        setUndecorated(true);
     }
 
     
@@ -47,11 +52,9 @@ public class HowToPlay extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         animation = new javax.swing.JButton();
         HowToPlayText = new javax.swing.JLabel();
-        HowToPlayText1 = new javax.swing.JLabel();
         HowToPlayText2 = new javax.swing.JLabel();
-        HowToPlayText3 = new javax.swing.JLabel();
-        HowToPlayText4 = new javax.swing.JLabel();
-        HowToPlayText5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         bgImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,7 +73,7 @@ public class HowToPlay extends javax.swing.JFrame {
             }
         });
         getContentPane().add(back);
-        back.setBounds(-100, 0, 270, 60);
+        back.setBounds(1250, 0, 120, 40);
 
         animation.setText("AnimButt");
         animation.addActionListener(new java.awt.event.ActionListener() {
@@ -79,55 +82,37 @@ public class HowToPlay extends javax.swing.JFrame {
             }
         });
         getContentPane().add(animation);
-        animation.setBounds(510, 130, 90, 23);
+        animation.setBounds(320, 570, 90, 23);
 
         HowToPlayText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HowToPlayText.png"))); // NOI18N
+        HowToPlayText.setMaximumSize(new java.awt.Dimension(560, 130));
+        HowToPlayText.setMinimumSize(new java.awt.Dimension(560, 130));
+        HowToPlayText.setPreferredSize(new java.awt.Dimension(560, 130));
         getContentPane().add(HowToPlayText);
-        HowToPlayText.setBounds(410, 10, 489, 130);
-
-        HowToPlayText1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon33.gif"))); // NOI18N
-        getContentPane().add(HowToPlayText1);
-        HowToPlayText1.setBounds(570, 280, 680, 370);
+        HowToPlayText.setBounds(400, -10, 560, 140);
 
         HowToPlayText2.setBackground(new java.awt.Color(51, 0, 0));
         HowToPlayText2.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
         HowToPlayText2.setForeground(new java.awt.Color(255, 255, 255));
-        HowToPlayText2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Live6.png"))); // NOI18N
-        HowToPlayText2.setText("Number of guesses");
-        HowToPlayText2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        HowToPlayText2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/howtoplay2.png"))); // NOI18N
         getContentPane().add(HowToPlayText2);
-        HowToPlayText2.setBounds(130, 330, 440, 60);
+        HowToPlayText2.setBounds(410, 250, 540, 510);
 
-        HowToPlayText3.setBackground(new java.awt.Color(51, 0, 0));
-        HowToPlayText3.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
-        HowToPlayText3.setForeground(new java.awt.Color(255, 255, 255));
-        HowToPlayText3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/musicMute.png"))); // NOI18N
-        HowToPlayText3.setText("                     Play/Mute music");
-        HowToPlayText3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(HowToPlayText3);
-        HowToPlayText3.setBounds(130, 510, 440, 60);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText(" has to guess the word within time limit to save the panda from monsters & help him reach home.");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(170, 180, 1070, 80);
 
-        HowToPlayText4.setBackground(new java.awt.Color(51, 0, 0));
-        HowToPlayText4.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
-        HowToPlayText4.setForeground(new java.awt.Color(255, 255, 255));
-        HowToPlayText4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/heart3.png"))); // NOI18N
-        HowToPlayText4.setText("           Number of lives left");
-        HowToPlayText4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(HowToPlayText4);
-        HowToPlayText4.setBounds(130, 390, 440, 60);
-
-        HowToPlayText5.setBackground(new java.awt.Color(51, 0, 0));
-        HowToPlayText5.setFont(new java.awt.Font("Ink Free", 1, 24)); // NOI18N
-        HowToPlayText5.setForeground(new java.awt.Color(255, 255, 255));
-        HowToPlayText5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/change.png"))); // NOI18N
-        HowToPlayText5.setText("                     Change the word");
-        HowToPlayText5.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(HowToPlayText5);
-        HowToPlayText5.setBounds(130, 450, 440, 60);
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("The rules of the game are as simple as the Classic Hangman game's rule.  In each level, the player");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(170, 140, 1110, 80);
 
         bgImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/HowToPlayBG.jpg"))); // NOI18N
         getContentPane().add(bgImage);
-        bgImage.setBounds(0, -30, 1370, 794);
+        bgImage.setBounds(0, -30, 1370, 820);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -159,8 +144,8 @@ public class HowToPlay extends javax.swing.JFrame {
     
     int xHowToPlay=400;
     int yHowToPlay=-100;
-    int wHowToPlay=500;
-    int hHowToPlay=140;
+    int wHowToPlay=560;
+    int hHowToPlay=130;
     
     private void animationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_animationActionPerformed
         // TODO add your handling code here:
@@ -168,12 +153,11 @@ public class HowToPlay extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(yHowToPlay<10){
+                if(yHowToPlay<-10){
                     yHowToPlay+=5;
                     HowToPlayText.setBounds(xHowToPlay, yHowToPlay, wHowToPlay, hHowToPlay);
                 }
                 else {
-                    yHowToPlay=-100;
                     ((Timer) (e.getSource())).stop();
                 }
             }
@@ -221,13 +205,11 @@ public class HowToPlay extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel HowToPlayText;
-    private javax.swing.JLabel HowToPlayText1;
     private javax.swing.JLabel HowToPlayText2;
-    private javax.swing.JLabel HowToPlayText3;
-    private javax.swing.JLabel HowToPlayText4;
-    private javax.swing.JLabel HowToPlayText5;
     private javax.swing.JButton animation;
     private javax.swing.JButton back;
     private javax.swing.JLabel bgImage;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

@@ -14,6 +14,9 @@ public class LoseDialogEasy extends javax.swing.JDialog {
     public LoseDialogEasy(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        dispose();
+        setUndecorated(true);
     }
     
     EasyGame easyRef;
@@ -37,6 +40,11 @@ public class LoseDialogEasy extends javax.swing.JDialog {
         
         easyRef.revealWord(reason);
         ReasonText.setText(reason);
+        ReasonText.setVisible(false);
+        
+        
+        dispose();
+        setUndecorated(true);
     }
     
     public static void alphabetSound(){
@@ -74,17 +82,16 @@ public class LoseDialogEasy extends javax.swing.JDialog {
         playAgainButton = new javax.swing.JButton();
         quitButton = new javax.swing.JButton();
         ReasonText = new javax.swing.JTextField();
-        pandaCry = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBounds(new java.awt.Rectangle(350, 250, 600, 450));
         setLocation(new java.awt.Point(350, 200));
-        setMaximumSize(new java.awt.Dimension(720, 440));
-        setMinimumSize(new java.awt.Dimension(720, 440));
-        setPreferredSize(new java.awt.Dimension(720, 440));
+        setMaximumSize(new java.awt.Dimension(720, 410));
+        setMinimumSize(new java.awt.Dimension(720, 410));
+        setPreferredSize(new java.awt.Dimension(720, 410));
         setResizable(false);
-        setSize(new java.awt.Dimension(720, 440));
+        setSize(new java.awt.Dimension(720, 410));
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -93,7 +100,7 @@ public class LoseDialogEasy extends javax.swing.JDialog {
         });
         getContentPane().setLayout(null);
 
-        playAgainButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LosePlayAgain.png"))); // NOI18N
+        playAgainButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/yesButton.png"))); // NOI18N
         playAgainButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         playAgainButton.setFocusable(false);
         playAgainButton.addActionListener(new java.awt.event.ActionListener() {
@@ -102,10 +109,10 @@ public class LoseDialogEasy extends javax.swing.JDialog {
             }
         });
         getContentPane().add(playAgainButton);
-        playAgainButton.setBounds(10, 330, 160, 70);
+        playAgainButton.setBounds(120, 240, 160, 70);
         getRootPane().setDefaultButton(playAgainButton);
 
-        quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseQuit.png"))); // NOI18N
+        quitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/noButton.png"))); // NOI18N
         quitButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         quitButton.setFocusable(false);
         quitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +121,7 @@ public class LoseDialogEasy extends javax.swing.JDialog {
             }
         });
         getContentPane().add(quitButton);
-        quitButton.setBounds(540, 330, 160, 70);
+        quitButton.setBounds(420, 240, 160, 70);
 
         ReasonText.setEditable(false);
         ReasonText.setBackground(new java.awt.Color(140, 0, 0));
@@ -128,15 +135,12 @@ public class LoseDialogEasy extends javax.swing.JDialog {
             }
         });
         getContentPane().add(ReasonText);
-        ReasonText.setBounds(0, 140, 720, 60);
-
-        pandaCry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/sadPanda1.png"))); // NOI18N
-        getContentPane().add(pandaCry);
-        pandaCry.setBounds(250, 190, 240, 240);
+        ReasonText.setBounds(10, 130, 130, 60);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseDialog.png"))); // NOI18N
-        BackImage.setMaximumSize(new java.awt.Dimension(700, 450));
-        BackImage.setMinimumSize(new java.awt.Dimension(700, 450));
+        BackImage.setMaximumSize(new java.awt.Dimension(720, 410));
+        BackImage.setMinimumSize(new java.awt.Dimension(720, 410));
+        BackImage.setPreferredSize(new java.awt.Dimension(720, 410));
         getContentPane().add(BackImage);
         BackImage.setBounds(0, 0, 720, 410);
 
@@ -221,7 +225,6 @@ public class LoseDialogEasy extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BackImage;
     private javax.swing.JTextField ReasonText;
-    private javax.swing.JLabel pandaCry;
     private javax.swing.JButton playAgainButton;
     private javax.swing.JButton quitButton;
     // End of variables declaration//GEN-END:variables

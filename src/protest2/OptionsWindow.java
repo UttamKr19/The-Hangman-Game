@@ -25,6 +25,9 @@ public class OptionsWindow extends javax.swing.JFrame {
         initComponents();
         creditPanel.setVisible(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
+        dispose();
+        setUndecorated(true);
     }
     
     public OptionsWindow(Home home) {
@@ -42,6 +45,10 @@ public class OptionsWindow extends javax.swing.JFrame {
         creditPanel.setVisible(false);
         animation.setVisible(false);
         animation.doClick();
+        creditButton.doClick();
+        
+        dispose();
+        setUndecorated(true);
         
     }
 
@@ -74,17 +81,23 @@ public class OptionsWindow extends javax.swing.JFrame {
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/backbutt.png"))); // NOI18N
         back.setText("back");
         back.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        back.setFocusable(false);
+        back.setRequestFocusEnabled(false);
+        back.setRolloverEnabled(false);
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backActionPerformed(evt);
             }
         });
         getContentPane().add(back);
-        back.setBounds(-100, 0, 280, 60);
+        back.setBounds(1250, 0, 120, 40);
 
         OptionsText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/CreditsText.png"))); // NOI18N
+        OptionsText.setMaximumSize(new java.awt.Dimension(560, 130));
+        OptionsText.setMinimumSize(new java.awt.Dimension(560, 130));
+        OptionsText.setPreferredSize(new java.awt.Dimension(560, 130));
         getContentPane().add(OptionsText);
-        OptionsText.setBounds(510, 10, 343, 130);
+        OptionsText.setBounds(370, -10, 560, 130);
 
         animation.setText("AnimButt");
         animation.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +175,7 @@ public class OptionsWindow extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/optionsBG.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1380, 760);
+        jLabel1.setBounds(0, 0, 1380, 780);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -195,10 +208,10 @@ public class OptionsWindow extends javax.swing.JFrame {
     
     Timer timer;
     
-    int xOptionsText=500;
+    int xOptionsText=400;
     int yOptionsText=-100;
-    int wOptionsText=440;
-    int hOptionsText=140;
+    int wOptionsText=560;
+    int hOptionsText=130;
     
     private void animationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_animationActionPerformed
         // TODO add your handling code here:
@@ -206,12 +219,11 @@ public class OptionsWindow extends javax.swing.JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
            
-        if(yOptionsText<10){
+        if(yOptionsText<-10){
             yOptionsText+=5;
             OptionsText.setBounds(xOptionsText, yOptionsText, wOptionsText, hOptionsText);
         }
         else {
-            yOptionsText=-100;
             ((Timer) (e.getSource())).stop();
         }
       }

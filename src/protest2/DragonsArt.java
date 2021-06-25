@@ -24,11 +24,15 @@ public class DragonsArt extends javax.swing.JFrame {
     public DragonsArt() {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        dispose();
+        setUndecorated(true);
     }
     
     public DragonsArt(Home home) {
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        dispose();
+        setUndecorated(true);
         homeRef=home;
         
     }
@@ -70,7 +74,7 @@ public class DragonsArt extends javax.swing.JFrame {
             }
         });
         getContentPane().add(back);
-        back.setBounds(-100, 0, 280, 60);
+        back.setBounds(1250, 0, 120, 40);
 
         dragon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dragon13.gif"))); // NOI18N
         getContentPane().add(dragon1);

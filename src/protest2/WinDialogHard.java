@@ -49,6 +49,9 @@ public class WinDialogHard extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
+        
+        dispose();
+        setUndecorated(true);
     }
     
     HardGame hardRef;
@@ -67,6 +70,9 @@ public class WinDialogHard extends javax.swing.JDialog {
                 doClose(RET_CANCEL);
             }
         });
+        
+        dispose();
+        setUndecorated(true);
     }
 
     /**
@@ -115,15 +121,17 @@ public class WinDialogHard extends javax.swing.JDialog {
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         pandaHappy = new javax.swing.JLabel();
+        pandaHappy1 = new javax.swing.JLabel();
+        pandaHappy2 = new javax.swing.JLabel();
         BackImage = new javax.swing.JLabel();
 
         setBounds(new java.awt.Rectangle(350, 250, 650, 400));
-        setLocation(new java.awt.Point(350, 200));
-        setMaximumSize(new java.awt.Dimension(708, 470));
-        setMinimumSize(new java.awt.Dimension(708, 470));
-        setPreferredSize(new java.awt.Dimension(708, 470));
+        setLocation(new java.awt.Point(250, 150));
+        setMaximumSize(new java.awt.Dimension(810, 510));
+        setMinimumSize(new java.awt.Dimension(810, 510));
+        setPreferredSize(new java.awt.Dimension(810, 510));
         setResizable(false);
-        setSize(new java.awt.Dimension(708, 470));
+        setSize(new java.awt.Dimension(810, 510));
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -141,7 +149,7 @@ public class WinDialogHard extends javax.swing.JDialog {
             }
         });
         getContentPane().add(okButton);
-        okButton.setBounds(30, 360, 160, 60);
+        okButton.setBounds(40, 340, 160, 70);
         getRootPane().setDefaultButton(okButton);
 
         cancelButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LoseQuit.png"))); // NOI18N
@@ -153,15 +161,23 @@ public class WinDialogHard extends javax.swing.JDialog {
             }
         });
         getContentPane().add(cancelButton);
-        cancelButton.setBounds(520, 360, 160, 60);
+        cancelButton.setBounds(610, 340, 160, 70);
 
-        pandaHappy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dance.gif"))); // NOI18N
+        pandaHappy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/win.gif"))); // NOI18N
         getContentPane().add(pandaHappy);
-        pandaHappy.setBounds(160, 170, 320, 290);
+        pandaHappy.setBounds(340, 120, 130, 120);
+
+        pandaHappy1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/dance.gif"))); // NOI18N
+        getContentPane().add(pandaHappy1);
+        pandaHappy1.setBounds(210, 230, 330, 290);
+
+        pandaHappy2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/congratulations.gif"))); // NOI18N
+        getContentPane().add(pandaHappy2);
+        pandaHappy2.setBounds(140, 10, 530, 160);
 
         BackImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/WinDialog.png"))); // NOI18N
         getContentPane().add(BackImage);
-        BackImage.setBounds(0, 0, 710, 470);
+        BackImage.setBounds(0, 0, 810, 510);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -247,6 +263,8 @@ public class WinDialogHard extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel pandaHappy;
+    private javax.swing.JLabel pandaHappy1;
+    private javax.swing.JLabel pandaHappy2;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;
